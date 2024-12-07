@@ -1,5 +1,5 @@
 const User = require("../Models/Auth");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
