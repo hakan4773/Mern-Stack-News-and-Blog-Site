@@ -32,16 +32,16 @@ function Footer() {
   };
 
   return (
-    <footer className="w-screen text-white bg-red-600  p-2 justify-between">
+    <footer className="w-full  text-white bg-red-600  p-2 overflow-hidden">
       {/* Tüm içeriği aynı hizada tutmak için flex */}
-      <div className="flex w-full justify-around items-start">
+      <div className="flex  flex-wrap  lg:flex-row justify-around items-start">
         {/* Bize Ulaşın */}
-        <form onSubmit={handleSubmit}>
-          <div className="flex flex-col w-[280px] p-4 space-y-4 text-black">
+        <form onSubmit={handleSubmit} className="sm:w-full lg:w-1/4 ">
+          <div className="flex flex-col w-[280px] lg:p-4 space-y-4 text-black">
             <h1 className="text-white text-xl">Bize Ulaşın</h1>
             <hr className="w-80" />
             <input
-              className="w-80 p-2"
+              className="w-80 p-2  "
               value={state.contact.name || ""}
               onChange={(e) => filterChange(e, "contact")}
               name="name"
@@ -68,7 +68,7 @@ function Footer() {
         </form>
 
         {/* Sosyal Medya Hesaplarımız */}
-        <div className="flex flex-col w-[150px] m-2 ml-8 space-y-4 ">
+        <div className="flex flex-col w-[150px] ml-12 lg:ml-8 my-4  space-y-4 ">
           <h1 className="text-white text-xl">Bizi Takip Edin</h1>
           <hr className="w-24" />
           <Link
@@ -92,7 +92,7 @@ function Footer() {
         </div>
 
         {/* Bağlantılar */}
-        <div className="flex flex-col w-[180px] p-4 space-y-4 items-start">
+        <div className="flex flex-col w-[180px] p-4 lg:p-4    space-y-4 items-start">
           <h1 className="text-white text-xl">Bağlantılar</h1>
           <hr className="w-20" />
           <ul className="font-medium space-y-4">
@@ -125,10 +125,13 @@ function Footer() {
         </div>
 
         {/* İletişim Bilgileri */}
-        <div className="flex flex-col w-[280px] p-4 space-y-4 items-start">
+        <div className="flex flex-col w-[280px] lg:p-4 space-y-4  items-start ">
           <h1 className="text-white text-xl">İletişim bilgileri</h1>
+
+
           <hr className="w-40" />
-          <p className="flex">
+
+          <p className="flex ">
             <GrLanguage className="m-2" />{" "}
             <span className="text-xl">Türkiye</span>{" "}
           </p>
@@ -140,10 +143,11 @@ function Footer() {
             <FaPhoneAlt className="m-2" />
             <span>(+90) 556 024 4561</span>
           </p>
+
         </div>
       </div>
 
-      <div className="flex flex-row space-x-4 justify-center">
+      <div className="flex flex-row lg:space-x-4 sm:space-x-2 justify-center">
         <Link>Gizlilik Politikası</Link>
         <div className="border-l"></div>
         <Link>Çerezlerin Kullanımı</Link>
@@ -153,7 +157,7 @@ function Footer() {
         <Link>Site Haritası</Link>
       </div>
 
-      <p className="pb-1">Copyright © News 2024</p>
+      <p className="lg:pb-1 lg:ml-2 ml-24 pt-2">Copyright © News 2024</p>
     </footer>
   );
 }

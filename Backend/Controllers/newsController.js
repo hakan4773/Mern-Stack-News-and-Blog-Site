@@ -171,6 +171,69 @@ exports.AddComment = async (req, res) => {
       res.status(500).json({ message: "Yorum eklenirken hata oluştu", error: error.message });
     }
 };
+
+exports.AddFavorite=async(req,res)=>{
+try {
+  const { user, news } = req.body;
+  const updatedUser =  await User.findByIdAndUpdate(user, { $addToSet: { favorites: news } }, { new: true }).populate('favorites');
+ 
+   if (!updatedUser) {
+    return res.status(404).json({ error: "Kullanıcı bulunamadı." });
+   }
+  res.status(200).json({
+    message: "Haber favorilere eklendi.",
+    favorites: updatedUser.favorites,
+  });
+} catch (error) {
+  console.error("AddFavorite Error:", error);
+  res.status(500).json({ error: "Favori eklenirken bir hata oluştu.",error:error.message });
+}
+}
+exports.RemoveFavorite=async(req,res)=>{
+  try {
+    const { user} = req.body;
+    const news = req.params.id
+    const updatedUser = await User.findByIdAndUpdate(
+      user,
+      { $pull: { favorites: news } }, // Favorilerden çıkarır
+      { new: true }
+    ).populate("favorites");
+
+    // if (!updatedUser) {
+    //   return res.status(404).json({ error: "Kullanıcı bulunamadı." });
+    // }
+  
+    res.status(200).json({
+      message: "Haber favorilerden çıkarıldı.",
+      favorites: updatedUser.favorites,
+    });
+  }catch (error) {
+    console.error("RemoveFavorite Error:", error);
+    res.status(500).json({ error: "Favori kaldırılırken bir hata oluştu.", error: error.message });
+  }
+  }
+  exports.GetFavorite=async(req,res)=>{
+    try {
+      const userID = req.session.userId;
+      console.log("Session UserID after login:", req.session.userId);
+
+      if (!userID) {
+        return res.status(400).json({ error: "Kullanıcı oturumu bulunamadı." });
+      }
+  
+      const user = await User.findById(userID).populate("favorites");
+  console.log("Kullanıcı: ",user)
+     
+      res.status(200).json({
+        message: "Favoriler başarıyla getirildi.",
+        favorites: user.favorites,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+    }
+
+
 exports.getComment=async(req,res)=>{
   const newsId = req.params.id; 
   try { 
