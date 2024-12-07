@@ -1,12 +1,10 @@
 const express=require("express");
 const cors=require("cors")
 const mongoose=require("mongoose")
-const fs=require("fs")
 const fileUpload = require('express-fileupload');
 const methodOverride=require("method-override")
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken')
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
