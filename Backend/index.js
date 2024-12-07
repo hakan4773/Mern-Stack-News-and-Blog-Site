@@ -2,7 +2,7 @@ const express=require("express");
 const cors=require("cors")
 const mongoose=require("mongoose")
 const fs=require("fs")
-const bcrypt=require("bcrypt")
+const bcrypt=require("bcryptjs")
 
 const fileUpload = require('express-fileupload');
 const methodOverride=require("method-override")
