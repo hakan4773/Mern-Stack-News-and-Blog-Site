@@ -1,5 +1,4 @@
 const mongoose=require("mongoose");
-const Category = require("./Category");
 const CommentSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },

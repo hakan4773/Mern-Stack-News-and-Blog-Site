@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from "react";
+import React, { useContext, useState} from "react";
 import { IoPersonOutline } from "react-icons/io5";
 import { NewsContext } from "../context/NewsContext";
 import axios from "axios";
@@ -43,7 +43,6 @@ try {
     console.log(error)
 }
   };
-//  const my_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGF0dXMiOiJ0ZWJyaWtsZXIhIDopIn0.sTLXY5iAs1IzJJ-8GVP_pMR65qqgCUpbMl-aSPcrQHc";
   const handleSubmitLogin = async(event) => {
 try {
     const loginData = { 
@@ -57,12 +56,10 @@ try {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
-          //  Authorization: `Bearer ${my_token}`,
           },
         }
       );
       setUser(response.data.user)
-     // localStorage.setItem("token", response.data.token);
       toggleLoginModal(); 
       alert(`Hoşgeldiniz ${user}`)
   
