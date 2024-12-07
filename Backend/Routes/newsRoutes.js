@@ -14,6 +14,9 @@ router.put("/EditPage/:id",newsController.UpdateNews)
 router.get("/comment/:id",newsController.getComment)
 router.post("/comment",newsController.AddComment)
 
+router.get("/favorites/:id",newsController.GetFavorite)
+router.post("/favorites",newsController.AddFavorite)
+router.delete("/favorites/:id",newsController.RemoveFavorite)
 
 router.post("/comment/:newsId/:commentId/reply", newsController.addReply);
 

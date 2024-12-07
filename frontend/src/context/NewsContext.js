@@ -3,7 +3,7 @@ import { createContext, useEffect, useReducer } from "react"
 import { useState } from "react"; 
 
 const initialState ={
-favorites:"",
+favorites: [],
 query:"",
 category:"",
 login:{},
@@ -17,6 +17,14 @@ export const NewsProvider =({children})=>{
   function NewsReducer(state,action){
     switch(action.type)
     {
+      case "REMOVE_FAVORITES":
+        return {
+          ...state,favorites:state.favorites.filter(item=>item._id !== action.news._id)
+      }
+      case "ADD_FAVORITES":
+        return {
+          ...state,favorites:[...state.favorites,action.news]
+      }
     case "HANDLE_CHANGE":
       return {
         ...state,[action.formType]:{...state[action.formType],[action.name]:action.value}
@@ -25,14 +33,13 @@ export const NewsProvider =({children})=>{
       return {...state,category:action.payload}
       case "FİLTER_İNPUT" :
         return {...state,query:action.payload}
-
     default:
       return state;
+
     }
     }
 
 const [state, dispatch] = useReducer(NewsReducer, initialState);
-
 
 const filterChange=(e,formType)=>{
 const { name, value } = e.target
@@ -68,6 +75,31 @@ const Filterİnput=(e)=>{
   const value = e.target.value;
   dispatch({type:"FİLTER_İNPUT",payload:value})
   }
+
+const AddFavorite=(news)=>{
+if(isFavorite(news)){
+  dispatch({ type: "REMOVE_FAVORITES", news });
+}
+else {
+  dispatch({ type: "ADD_FAVORITES", news });
+}
+}
+
+
+const isFavorite = (news) => {
+  const result = state.favorites.some((item) => item._id === news._id);
+  return result;
+};
+
+useEffect(() => {
+  console.log("Updated favorites:", state.favorites);
+}, [state.favorites]);
+
+
+
+
+
+
 
 
   const [user, setUser] = useState(initialState.login);
@@ -168,7 +200,9 @@ return newMode;
         mode,
         users:state.users,
         formatTimeAgo,
-        handleLogout
+        handleLogout,
+        AddFavorite,
+        isFavorite
         }
 return (
     <NewsContext.Provider value={values}>{children}</NewsContext.Provider>

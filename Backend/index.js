@@ -22,7 +22,7 @@ const adminRoutes=require("./Routes/adminRoutes")
 const app=express();
 dotenv.config();
 
-mongoose.connect('mongodb://127.0.0.1:27017/News-db',).then(()=>console.log("Connected"))
+mongoose.connect(process.env.MONGO_URI,).then(()=>console.log("Connected"))
 
 //Middlewares
 app.use(cors({
@@ -61,7 +61,7 @@ app.use("/Admin",adminRoutes)
 
 
 
-const PORT=5000;
+const PORT=process.env.PORT;
 app.listen(PORT,()=>{
 console.log(`Server is running on the ${PORT}`)
 

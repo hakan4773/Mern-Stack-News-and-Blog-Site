@@ -46,7 +46,7 @@ const getSingleNews=(id)=>{
   return (
     <>
       {/* üST taraftaki div */}
-<div className='flex  p-4 mx-4'>
+<div className='flex  w-full p-4 mx-4 overflow-hidden'>
   <h1 className='font-bold text-red-600 text-2xl p-2'>GÜNCEL HABERLER</h1>
   <div className="ml-auto  text-xl ">
         <select className="bg-slate-100 p-2 text-xl border-none focus:border-red-600">

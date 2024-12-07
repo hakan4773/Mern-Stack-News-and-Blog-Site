@@ -31,7 +31,7 @@ try{
   return (
     <div className="flex flex-row ">
 
-<div className="py-2"> 
+<div className="py-2 px-2"> 
 <div className="relative"> 
 <FcOvertime className="absolute top-1 left-1" size={27}/>
   <select className="border-2 p-1 pl-10  rounded-md text-black border-slate-500 border-opacity-40 w-40">

@@ -8,7 +8,7 @@ gender:{type:String},
 number:{type:String},
 Address:{type:String},
 image:{type:String},
-
+favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "News" }],
 role:{
     type:String,
 enum:["user", "author", "admin"],

@@ -85,15 +85,15 @@ const isAdmin = () => {
 };
 
   return (
-    <div className="pb-2">
+    <div className="lg:pb-2 ">
 {user ?  (
-  <div className=" relative flex items-center">  
+  <div className=" relative flex items-center ">  
     <img src={user.image} onClick={toggleSettings} className="w-14 h-14 rounded-full cursor-pointer " alt="User Profile" />
     <button  className='ml-2  font-semibold text-xl text-white'>
   
         </button>
     {toggleDown && (
-      <ul className="absolute top-16 right-0 z-50 bg-white shadow-lg rounded-md py-2 text-black w-36">
+      <ul className="absolute lg:top-16 top-14 lg:right-0 right-6 z-50 bg-white shadow-lg rounded-md py-2 text-black w-36 ">
         <li className="flex p-2 hover:bg-gray-100 cursor-pointer" onClick={isAdmin}><IoPerson className="m-1" /> Profilim</li>
         <li className="flex p-2 hover:bg-gray-100 cursor-pointer"><IoSettings className="m-1" /> Settings</li>
         <li className="flex p-2 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}><IoLogOut className="m-1" />Logout</li>
