@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Login from "./Login";
-import { jwtDecode } from "jwt-decode";
 import { NewsContext } from "../context/NewsContext";
 import axios from "axios";
 
 function Header() {
-  const { FilterSelect, Filterİnput,user,setUser } = useContext(NewsContext);
+  const { FilterSelect, Filterİnput } = useContext(NewsContext);
   const [categories, setCategories] = useState([]);
   const [toggleNotification, setToggleNotification] = useState(false);
 
