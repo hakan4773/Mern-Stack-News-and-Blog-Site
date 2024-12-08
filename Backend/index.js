@@ -3,7 +3,7 @@ const cors=require("cors")
 const mongoose=require("mongoose")
 const fs=require("fs")
 const bcrypt=require("bcryptjs")
-
+const path=require("path")
 const fileUpload = require('express-fileupload');
 const methodOverride=require("method-override")
 const dotenv = require('dotenv');
