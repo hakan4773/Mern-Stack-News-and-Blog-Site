@@ -25,7 +25,7 @@ dotenv.config();
 app.use(express.static(path.join(process.cwd(), '../frontend/build')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(process.cwd(), '../frontend/build', 'index.html'));
+  return res.sendFile(path.join(process.cwd(), 'build', 'index.html'));
 });
 
 mongoose.connect(process.env.MONGO_URI,).then(()=>console.log("Connected"))
