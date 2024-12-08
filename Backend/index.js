@@ -32,7 +32,7 @@ mongoose.connect(process.env.MONGO_URI,).then(()=>console.log("Connected"))
 
 //Middlewares
 app.use(cors({
-    origin: 'http://localhost:3000', // Change to your frontend URL
+  origin: ['http://localhost:3000', 'https://mern-stack-news-and-blog-site.onrender.com'], // Change to your frontend URL
     credentials: true
   }));
   app.use(session({
