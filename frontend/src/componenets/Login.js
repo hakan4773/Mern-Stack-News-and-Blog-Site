@@ -16,6 +16,10 @@ const navigate=useNavigate();
     toggleRegisterModal,
     isRegisterModalOpen,
   } = useContext(NewsContext);
+
+
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+
   const handleSubmitRegister = async(event) => {
     event.preventDefault();
 try {
@@ -30,13 +34,13 @@ try {
         image:""
       };
       const response = await axios.post(
-        "http://localhost:5000/users/register",
+        `${backendUrl}/users/register`,
         registerData,
         {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },{ withCredentials: true }
       );
       toggleLoginModal(); // Modal kapatılır.
 } catch (error) {
