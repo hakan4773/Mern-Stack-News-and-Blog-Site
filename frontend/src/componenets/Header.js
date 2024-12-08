@@ -10,12 +10,12 @@ function Header() {
   const { FilterSelect, Filterİnput } = useContext(NewsContext);
   const [categories, setCategories] = useState([]);
   const [toggleNotification, setToggleNotification] = useState(false);
-
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
  
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/categories");
+        const response = await axios.get(`${backendUrl}/categories`);
         setCategories(response.data.categories);
       } catch (error) {
         console.log("Kategori verisi alınamadı:", error);
