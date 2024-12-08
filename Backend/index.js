@@ -38,7 +38,7 @@ app.use(cors({
       secure: false, 
       maxAge: 1000 * 60 * 60 * 24 * 365, 
     },
-    store:MongoStore.create({mongoUrl:"mongodb://127.0.0.1:27017/News-db"})
+    store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
 
   }));
 
@@ -62,7 +62,7 @@ app.use("/Admin",adminRoutes)
 
 
 
-const PORT=process.env.PORT;
+const PORT=process.env.PORT || 5000;
 app.listen(PORT,()=>{
 console.log(`Server is running on the ${PORT}`)
 
