@@ -12,8 +12,7 @@ function App() {
   return (
     
     <NewsProvider>
-      <Router >
-        
+      <Router> 
         <Content />
       </Router>
     </NewsProvider>
