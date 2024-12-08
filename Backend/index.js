@@ -39,7 +39,6 @@ app.use(cors({
       maxAge: 1000 * 60 * 60 * 24 * 365, 
     },
     store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
-
   }));
 
 app.use(cookieParser());
