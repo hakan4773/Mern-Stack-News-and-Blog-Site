@@ -22,12 +22,15 @@ const adminRoutes=require("./Routes/adminRoutes")
 // const commentRoutes=require("./Routes/commentRoutes")
 const app=express();
 dotenv.config();
-app.use(express.static(path.join(process.cwd(), '../frontend/build')));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
+// Tüm yönlendirmeleri React uygulamasına yönlendirin
 app.get('*', (req, res) => {
-  return res.sendFile(path.join(process.cwd(), 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
 });
 
+console.log('Proje kök dizini:', process.cwd());
+console.log('Statik dosya yolu:', path.join(process.cwd(), '../frontend/build'));
 mongoose.connect(process.env.MONGO_URI,).then(()=>console.log("Connected"))
 
 //Middlewares
