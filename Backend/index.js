@@ -22,22 +22,10 @@ const adminRoutes=require("./Routes/adminRoutes")
 // const commentRoutes=require("./Routes/commentRoutes")
 const app=express();
 dotenv.config();
-app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-// Tüm yönlendirmeleri React uygulamasına yönlendirin
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
-});
-
-console.log('Proje kök dizini:', process.cwd());
-console.log('Statik dosya yolu:', path.join(process.cwd(), '../frontend/build','index.html'));
-mongoose.connect(process.env.MONGO_URI,).then(()=>console.log("Connected"))
+mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
 
 //Middlewares
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://mern-stack-news-and-blog-site.onrender.com'], // Change to your frontend URL
-    credentials: true
-  }));
+
   app.use(session({
     secret: 'my_cat', 
     resave: false,
@@ -48,10 +36,14 @@ app.use(cors({
     },
     store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
   }));
-
-app.use(cookieParser());
-app.use(express.json());
+  app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
+  app.use(cors({
+    origin: ['http://localhost:3000', 'https://mern-stack-news-and-blog-site.onrender.com'], 
+      credentials: true
+    }));
+app.use(cookieParser());
+
 app.use(fileUpload());
 app.use(express.static("public"))
 app.use(methodOverride("_method",{methods:["GET","POST"]}))
@@ -66,7 +58,12 @@ app.use("/contact",contactRoutes)
 // app.use("/comment",commentRoutes)
 
 app.use("/Admin",adminRoutes)
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
+// Tüm yönlendirmeleri React uygulamasına yönlendirin
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
+});
 
 
 const PORT=process.env.PORT || 5000;
