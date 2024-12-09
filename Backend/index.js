@@ -30,7 +30,7 @@ app.get('*', (req, res) => {
 });
 
 console.log('Proje kök dizini:', process.cwd());
-console.log('Statik dosya yolu:', path.join(process.cwd(), '../frontend/build'));
+console.log('Statik dosya yolu:', path.join(process.cwd(), '../frontend/build','index.html'));
 mongoose.connect(process.env.MONGO_URI,).then(()=>console.log("Connected"))
 
 //Middlewares
