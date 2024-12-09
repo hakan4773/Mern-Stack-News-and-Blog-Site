@@ -40,7 +40,7 @@ try {
           headers: {
             "Content-Type": "application/json",
           },
-        },{ withCredentials: true }
+        }
       );
       toggleLoginModal(); // Modal kapatılır.
 } catch (error) {
