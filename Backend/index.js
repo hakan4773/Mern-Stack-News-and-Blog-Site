@@ -47,6 +47,7 @@ app.use(cookieParser());
 app.use(fileUpload());
 app.use(express.static("public"))
 app.use(methodOverride("_method",{methods:["GET","POST"]}))
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 
 app.use("/",pageRoutes)
@@ -58,7 +59,6 @@ app.use("/contact",contactRoutes)
 // app.use("/comment",commentRoutes)
 
 app.use("/Admin",adminRoutes)
-app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Tüm yönlendirmeleri React uygulamasına yönlendirin
 app.get('*', (req, res) => {
