@@ -31,8 +31,10 @@ mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: true, 
-      maxAge: 1000 * 60 * 60 * 24 * 365, 
+      secure: process.env.NODE_ENV === 'production', // Sadece production'da true
+      httpOnly: true, // Güvenlik için önemli
+      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax', // Yerel ortamda 'lax', production'da 'strict'
+      maxAge: 1000 * 60 * 60 * 24 * 365, // 1 yıl
     },
     store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
   }));
@@ -63,6 +65,7 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 // Tüm yönlendirmeleri React uygulamasına yönlendirin
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
+  console.log("başrısız",{error:error.message})
 });
 
 
