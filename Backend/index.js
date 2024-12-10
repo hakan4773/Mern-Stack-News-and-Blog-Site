@@ -23,7 +23,7 @@ const adminRoutes=require("./Routes/adminRoutes")
 const app=express();
 dotenv.config();
 mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
-
+const isProduction = process.env.NODE_ENV === 'production';
 //Middlewares
 
   app.use(session({
@@ -31,7 +31,7 @@ mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: false, 
+      secure: isProduction, 
       maxAge: 1000 * 60 * 60 * 24 * 365, 
     },
     store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
@@ -63,7 +63,7 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 // Tüm yönlendirmeleri React uygulamasına yönlendirin
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
-  console.log("başrısız",{error:error.message})
+  if (err) { console.log("başarısız", { error: err.message }); }
 });
 
 
