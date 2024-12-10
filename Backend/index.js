@@ -31,9 +31,9 @@ mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: process.env.NODE_ENV === 'production', // Sadece production'da true
-      httpOnly: true, // Güvenlik için önemli
-      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax', // Yerel ortamda 'lax', production'da 'strict'
+      httpOnly: true,
+      secure: false, // Test için false yapın
+      sameSite: 'lax',
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 yıl
     },
     store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
