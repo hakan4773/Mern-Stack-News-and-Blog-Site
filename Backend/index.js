@@ -31,7 +31,7 @@ const isProduction = process.env.NODE_ENV === 'production';
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: isProduction, 
+      secure: false , //isProduction
       maxAge: 1000 * 60 * 60 * 24 * 365, 
     },
     store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
@@ -59,12 +59,13 @@ app.use("/contact",contactRoutes)
 // app.use("/comment",commentRoutes)
 
 app.use("/Admin",adminRoutes)
-app.use(express.static(path.join(__dirname, '../frontend/build')));
-// Tüm yönlendirmeleri React uygulamasına yönlendirin
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
-  if (err) { console.log("başarısız", { error: err.message }); }
-});
+
+// app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
+//   if (err) { console.log("başarısız", { error: err.message }); }
+// });
 
 
 const PORT=process.env.PORT || 5000;

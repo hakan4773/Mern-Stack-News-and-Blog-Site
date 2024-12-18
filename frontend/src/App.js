@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation,useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './componenets/Header';
 import Home from './pages/Home';
 import { NewsProvider } from './context/NewsContext';
@@ -8,6 +8,7 @@ import Footer from './componenets/Footer';
 import AdminRouter from './AdminRouter';
 import SingleBlog from './pages/SingleBlog';
 import Notfound  from './pages/Notfound'
+import './index.css'
 function App() {
   return (
     

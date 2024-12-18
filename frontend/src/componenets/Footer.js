@@ -32,7 +32,7 @@ function Footer() {
   };
 
   return (
-    <footer className="w-full  text-white bg-red-600  p-2 overflow-hidden">
+    <footer className="w-screen  text-white bg-red-600  p-2 overflow-hidden">
       {/* Tüm içeriği aynı hizada tutmak için flex */}
       <div className="flex  flex-wrap  lg:flex-row justify-around items-start">
         {/* Bize Ulaşın */}

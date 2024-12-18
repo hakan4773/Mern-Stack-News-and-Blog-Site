@@ -96,7 +96,7 @@ const isAdmin = () => {
   
         </button>
     {toggleDown && (
-      <ul className="absolute lg:top-16 top-14 lg:right-0 right-6 z-50 bg-white shadow-lg rounded-md py-2 text-black w-36 ">
+      <ul className="absolute  top-14  right-6 z-50 bg-white shadow-lg rounded-md py-2 text-black w-36 ">
         <li className="flex p-2 hover:bg-gray-100 cursor-pointer" onClick={isAdmin}><IoPerson className="m-1" /> Profilim</li>
         <li className="flex p-2 hover:bg-gray-100 cursor-pointer"><IoSettings className="m-1" /> Settings</li>
         <li className="flex p-2 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}><IoLogOut className="m-1" />Logout</li>
