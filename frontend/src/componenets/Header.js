@@ -5,7 +5,6 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import Login from "./Login";
 import { NewsContext } from "../context/NewsContext";
 import axios from "axios";
-
 function Header() {
   const { FilterSelect, Filterİnput } = useContext(NewsContext);
   const [categories, setCategories] = useState([]);
@@ -30,19 +29,19 @@ function Header() {
   };
 
   return (
-    <div className="w-full lg:h-20 h-24 bg-red-600 flex flex-wrap justify-between items-center  top-0 left-0 z-50">
-      <div className="font-thin lg:visible  text-white lg:p-4 py-2 ">
-        {/* <h1 className="">
+    <div className="w-screen pb-8  lg:h-24 h-auto bg-red-600  flex flex-wrap justify-between items-center  z-50">
+      {/* <div className="font-thin lg:visible  text-white lg:p-4 py-2 ">
+         <h1 className="">
           <Link to="/" className="font-semibold lg:text-4xl sm:text-xs  ">
             <span className="text-blue-500">TEKNO</span><span>NEWS</span>
           </Link>
-        </h1> */}
-      </div>
+        </h1> 
+      </div> */}
 
-      <div className="lg:space-x-4 gap-2  flex sm:flex-wrap   lg:flex-row  text-center items-center mr-auto ">
-        <div><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm lg:hover:bg-red-400 lg:rounded-md lg:p-2  hover:bg-red-300">AnaSayfa</Link></div>
-        <div><Link to="/News" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md lg:p-2  hover:bg-red-300">Haberler</Link></div>
-        <div><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md lg:p-2  hover:bg-red-300">Önerilenler</Link></div>
+      <div className="lg:gap-2 gap-4   px-12 lg:p-4  flex sm:flex-wrap   lg:flex-row  text-center items-center mr-auto ">
+        <div><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1  hover:bg-red-300">AnaSayfa</Link></div>
+        <div><Link to="/News" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Haberler</Link></div>
+        <div><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Önerilenler</Link></div>
 
         <div className="lg:p-4  font-bold lg:text-xl sm:text-sm ">
           {categories.length === 0 ? (
@@ -65,18 +64,20 @@ function Header() {
        
       </div>
 
-      <div className="p-5 relative bottom-[100px] lg:left-0 left-24 lg:top-0">
+      <div className="lg:px-5 px-10   relative">
         <input
           type="text"
           name="filter"
           onChange={Filterİnput}
           placeholder="Ara..."
-          className="border border-gray-300 rounded-md p-2 pl-10 text-gray-800 w-40 lg:w-60"
+          className="border border-gray-300 rounded-md p-2 pl-10 text-gray-800 w-[360px]  lg:w-60"
         />
-        <CiSearch className="absolute top-8 left-8 text-gray-600" size={20} />
+        <CiSearch className="absolute lg:top-3 lg:left-8  top-3 text-gray-600" size={20} />
       </div>
 
-      <div className="py-6 ml-4 relative bottom-[100px] lg:left-0 left-6 lg:top-0 overflow-visible ">
+
+{/* inputu biraz daha küçült ortaya al */}
+      <div className=" relative lg:p-4 p-2  ">
         <button className="relative lg:hover:bg-red-400 lg:rounded-md   hover:bg-red-300" onClick={toggleNotificationHandler}>
           <IoMdNotificationsOutline className="m-1 text-white" size={30} />
           <span className="absolute top-0 right-0 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
@@ -97,8 +98,8 @@ function Header() {
         )}
       </div>
 
-      
-        <div className="lg:p-4 relative bottom-[100px] left-0 lg:top-0"><Login /></div>
+      {/* relative bottom-[100px] left-0 lg:top-0       //lg:p-2 pr-6*/}
+        <div className="lg:pr-8 pr-3" ><Login /></div>
   
     </div>
   );

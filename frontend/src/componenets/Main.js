@@ -48,7 +48,7 @@ const getSingleNews=(id)=>{
       {/* üST taraftaki div */}
 <div className='flex  w-full p-4 mx-4 overflow-hidden'>
   <h1 className='font-bold text-red-600 text-2xl p-2'>GÜNCEL HABERLER</h1>
-  <div className="ml-auto  text-xl ">
+  <div className="ml-auto  text-xl lg:pr-6 pr-4 ">
         <select className="bg-slate-100 p-2 text-xl border-none focus:border-red-600">
           <option className="bg-white text-black">En yeni</option>
           <option className="bg-white text-black">En eski</option>
@@ -61,10 +61,10 @@ const getSingleNews=(id)=>{
     {/* Sol taraftaki div */}
 
 
-    <div  className='grid lg:grid-cols-3 sm:grid-cols-1 gap-4 w-[70%] h-full '>
+    <div  className='grid lg:grid-cols-3 sm:grid-cols-1  gap-4 w-[70%] h-full'>
     {filteredNews.length > 0 ? (
   filteredNews.slice(0,6).map((item) => (
-      <div key={item._id} className='shadow-sm bg-white w-[300px] h-auto hover:shadow-xl' >
+      <div key={item._id} className='shadow-sm rounded-md bg-white w-[300px] h-auto hover:shadow-xl' >
         <button onClick={()=>getSingleNews(item._id)}  >
           <img className="w-full h-40 object-cover rounded-t-md" src={item.image} alt="Tech" />
           <p className='text-gray-500 font-semibold p-2 text-left'>{item?.category?.name || "Kategori Yok"}</p>
@@ -79,7 +79,7 @@ const getSingleNews=(id)=>{
 )}    </div>
 
     {/* Sağ taraftaki div */}
-    <div className='w-[20%]  p-4 h-full shadow-sm bg-white'>
+    <div className='lg:w-[20%] w-52   p-4 h-full shadow-sm bg-white'>
       <h1 className='text-red-500 font-bold text-xl'>Günün Öne Çıkan Haberleri</h1>
       {news.length > 0 ? (
   news.slice(0, 3).map((item) => (
@@ -111,7 +111,7 @@ const getSingleNews=(id)=>{
 <div className='grid lg:grid-cols-3 sm:grid-cols-1 gap-4 w-[70%] h-full'>
 {filteredBlog.length > 0 ? (
   filteredBlog.map((item) => (
-  <div key={item._id} className='border w-[300px] h-auto hover:shadow-xl shadow-sm bg-white'>
+  <div key={item._id} className='border w-[300px] h-auto rounded-md hover:shadow-xl shadow-sm bg-white'>
   <Link to={`/Blog/${item._id}`}>
     <img className="w-full h-40 object-cover rounded-t-md" src={item.image || "No image"} alt="Tech" />
      <p className='text-gray-500 font-semibold p-2 '>{item?.category?.name || "Kategori Yok"}</p>
@@ -127,7 +127,7 @@ const getSingleNews=(id)=>{
 
 
 {/* Günün Sözü bölümü */}
-<div className='w-[20%]  p-2 h-full shadow-sm bg-white'>
+<div className='lg:w-[20%] w-52 p-2 h-full shadow-sm bg-white'>
       <h4 className='text-red-500 font-bold text-xl'>Günün Sözleri</h4>
       <div>
 <p>İnsanın özgürlüğü; istediği her şeyi yapabilmesinde değil, istemediği hiçbir şeyi yapmak zorunda olmamasındadır.	</p>        
