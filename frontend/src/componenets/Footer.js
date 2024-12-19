@@ -61,7 +61,7 @@ function Footer() {
               name="message"
               placeholder="Mesajınız"
             />
-            <button className="w-80 border rounded-xl bg-white text-xl hover:bg-red-600">
+            <button className="w-80 border rounded-xl bg-white text-xl hover:bg-red-600 ">
               Gönder
             </button>
           </div>
@@ -75,19 +75,19 @@ function Footer() {
             to="https://www.instagram.com/accounts/login/"
             className="hover:text-white"
           >
-            <FaInstagram size={30} />
+            <FaInstagram size={30} className=" transform hover:rotate-180 transition duration-400 hover:size-10" />
           </Link>
           <Link to="https://x.com/?lang=tr" className="hover:text-white">
-            <BsTwitterX size={30} />
+            <BsTwitterX size={30} className=" transform hover:rotate-180 transition duration-400 hover:size-10" />
           </Link>
           <Link to="https://www.youtube.com/" className="hover:text-white">
-            <FaYoutube size={30} />
+            <FaYoutube size={30}  className=" transform hover:rotate-180 transition duration-400 hover:size-10"/>
           </Link>
           <Link
             to="https://www.facebook.com/?locale=tr_TR"
             className="hover:text-white"
           >
-            <FaFacebook size={30} />
+            <FaFacebook size={30} className=" transform hover:rotate-180 transition duration-400 hover:size-10"/>
           </Link>
         </div>
 

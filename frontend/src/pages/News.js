@@ -91,9 +91,9 @@ if (loading) return <div>Loading...</div>;
 if (error) return <div>{error}</div>;
 
   return (
-    <div className='flex flex-col justify-center items-center  text-center p-10 bg-slate-100 overflow-hidden '>
+    <div className='flex flex-col justify-center items-center  text-center p-10 bg-slate-100  '>
 
-    <div className="lg:w-[800px]  h-auto  space-y-4  p-6">
+    <div className="w-[400px] lg:w-[800px] md:w-[600px] h-auto  space-y-4  p-6">
   <div className="flex text-xl ">
         <select className="  bg-slate-100  p-2 text-xl border-none focus:border-red-600">
           <option className="bg-white text-black">En yeni</option>
@@ -108,9 +108,9 @@ if (error) return <div>{error}</div>;
 {filteredNews.length > 0 ? (
    filteredNews.map(item => (
     
-    <div key={item._id} className='sm:flex lg:flex-row  bg-white '>
+    <div key={item._id} className='flex flex-col md:flex-row bg-white '>
       
-        <img src={item?.image || "No image"} className="w-full sm:w-full lg:w-[250px] object-cover rounded-t-md" alt="Tech" />
+        <img src={item?.image || "No image"} className="w-full md:w-[200px] lg:w-[250px]  object-cover rounded-t-md" alt="Tech" />
         <p className='text-gray-500 font-semibold m-2'>{item?.category?.name || "Kategori Yok"}</p>
         <Link to={`/News/${item._id}`}>
         <h1 className='text-black font-semibold text-xl lg:p-6 p-2 text-left'>

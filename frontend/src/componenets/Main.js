@@ -48,12 +48,6 @@ const getSingleNews=(id)=>{
       {/* üST taraftaki div */}
 <div className='flex  w-full p-4 mx-4 overflow-hidden'>
   <h1 className='font-bold text-red-600 text-2xl p-2'>GÜNCEL HABERLER</h1>
-  <div className="ml-auto  text-xl lg:pr-6 pr-4 ">
-        <select className="bg-slate-100 p-2 text-xl border-none focus:border-red-600">
-          <option className="bg-white text-black">En yeni</option>
-          <option className="bg-white text-black">En eski</option>
-        </select>
-      </div>
 </div>
 
     <div className='flex  justify-between p-6 h-auto'>
@@ -61,10 +55,10 @@ const getSingleNews=(id)=>{
     {/* Sol taraftaki div */}
 
 
-    <div  className='grid lg:grid-cols-3 sm:grid-cols-1  gap-4 w-[70%] h-full'>
+    <div  className='grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2  gap-4 w-[70%] h-full'>
     {filteredNews.length > 0 ? (
   filteredNews.slice(0,6).map((item) => (
-      <div key={item._id} className='shadow-sm rounded-md bg-white w-[300px] h-auto hover:shadow-xl' >
+      <div key={item._id} className='shadow-sm rounded-md bg-white lg:w-[300px] w-60 h-auto hover:shadow-xl' >
         <button onClick={()=>getSingleNews(item._id)}  >
           <img className="w-full h-40 object-cover rounded-t-md" src={item.image} alt="Tech" />
           <p className='text-gray-500 font-semibold p-2 text-left'>{item?.category?.name || "Kategori Yok"}</p>
@@ -108,14 +102,14 @@ const getSingleNews=(id)=>{
 
   </div>
   <div className='flex  justify-between p-6 h-auto'>
-<div className='grid lg:grid-cols-3 sm:grid-cols-1 gap-4 w-[70%] h-full'>
+<div className='grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-4 w-[70%] h-full'>
 {filteredBlog.length > 0 ? (
   filteredBlog.map((item) => (
-  <div key={item._id} className='border w-[300px] h-auto rounded-md hover:shadow-xl shadow-sm bg-white'>
+  <div key={item._id} className='border lg:w-[300px] w-60 h-auto rounded-md hover:shadow-xl shadow-sm bg-white'>
   <Link to={`/Blog/${item._id}`}>
     <img className="w-full h-40 object-cover rounded-t-md" src={item.image || "No image"} alt="Tech" />
      <p className='text-gray-500 font-semibold p-2 '>{item?.category?.name || "Kategori Yok"}</p>
-     <h1 className='text-black font-semibold text-xl p-2'>
+     <h1 className='text-black text-xl p-2'>
 {item.title}
     </h1>
     </Link>
