@@ -2,13 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoMenu } from "react-icons/io5";
 import Login from "./Login";
 import { NewsContext } from "../context/NewsContext";
 import axios from "axios";
+
 function Header() {
   const { FilterSelect, Filterİnput } = useContext(NewsContext);
   const [categories, setCategories] = useState([]);
   const [toggleNotification, setToggleNotification] = useState(false);
+  const [menu,setMenu]=useState(false)
   const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
  
   useEffect(() => {
@@ -27,6 +30,9 @@ function Header() {
   const toggleNotificationHandler = () => {
     setToggleNotification(prev => !prev);
   };
+  const HandleMenu = () => {
+    setMenu((prev) => !prev);
+  };
 
   return (
     <div className="w-screen pb-8  lg:h-24 h-auto bg-red-600  flex flex-wrap justify-between items-center  z-50">
@@ -37,11 +43,44 @@ function Header() {
           </Link>
         </h1> 
       </div> */}
+<div className={`block sm:hidden justify-center text-center  items-center ${menu && 'h-52'}`}>
+<button onClick={HandleMenu}>
+          <IoMenu className="text-white" size={40} />
+        </button>
+        {menu && (
+          <div className="absolute top-14 left-0 w-full   bg-red-600 text-white shadow-lg z-50">
+            <ul className="flex flex-col text-xl">
+              <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">
+                <Link to="/">AnaSayfa</Link>
+              </li>
+              <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">
+                <Link to="/News">Haberler</Link>
+              </li>
+              <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">
+                <Link to="/">Önerilenler</Link>
+              </li>
+              <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">
+                <select
+                  onChange={FilterSelect}
+                  className="bg-red-600 hover:bg-gray-700 text-white p-2 border-none focus:outline-none"
+                >
+                  <option>Kategoriler</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id} className="bg-white text-black">
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </li>
+            </ul>
+          </div>
+        )}
 
-      <div className="lg:gap-2 gap-4   px-12 lg:p-4  flex sm:flex-wrap   lg:flex-row  text-center items-center mr-auto ">
-        <div><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1  hover:bg-red-300">AnaSayfa</Link></div>
-        <div><Link to="/News" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Haberler</Link></div>
-        <div><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Önerilenler</Link></div>
+</div>
+      <div className=" px-8 lg:p-4 hidden sm:flex sm:flex-wrap   lg:flex-row  text-center items-center mr-auto ">
+        <div id="home"><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1  hover:bg-red-300">AnaSayfa</Link></div>
+        <div id="news"><Link to="/News" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Haberler</Link></div>
+        <div id="recommend"><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Önerilenler</Link></div>
 
         <div className="lg:p-4  font-bold lg:text-xl sm:text-sm ">
           {categories.length === 0 ? (
@@ -64,20 +103,19 @@ function Header() {
        
       </div>
 
-      <div className="lg:px-5 px-10   relative">
+      <div className="lg:px-5 px-10 md:px-2 hidden sm:block relative">
         <input
           type="text"
           name="filter"
           onChange={Filterİnput}
           placeholder="Ara..."
-          className="border border-gray-300 rounded-md p-2 pl-10 text-gray-800 w-[360px]  lg:w-60"
+          className="border border-gray-300 rounded-md p-2 pl-10 text-gray-800 w-[300px] md:w-44  lg:w-60"
         />
-        <CiSearch className="absolute lg:top-3 lg:left-8  top-3 text-gray-600" size={20} />
+        <CiSearch className="absolute lg:top-3 lg:left-8   top-3 text-gray-600" size={20} />
       </div>
 
 
-{/* inputu biraz daha küçült ortaya al */}
-      <div className=" relative lg:p-4 p-2  ">
+      <div className="relative lg:p-4  lg:mr-0 mr-auto hidden sm:block ">
         <button className="relative lg:hover:bg-red-400 lg:rounded-md   hover:bg-red-300" onClick={toggleNotificationHandler}>
           <IoMdNotificationsOutline className="m-1 text-white" size={30} />
           <span className="absolute top-0 right-0 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
@@ -99,7 +137,7 @@ function Header() {
       </div>
 
       {/* relative bottom-[100px] left-0 lg:top-0       //lg:p-2 pr-6*/}
-        <div className="lg:pr-8 pr-3" ><Login /></div>
+        <div className="lg:pr-8 pr-3 hidden sm:block  lg:mr-0 mr-auto" ><Login /></div>
   
     </div>
   );
