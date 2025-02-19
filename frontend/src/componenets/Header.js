@@ -10,7 +10,7 @@ function Header() {
   const { FilterSelect, Filterİnput } = useContext(NewsContext);
   const [categories, setCategories] = useState([]);
   const [toggleNotification, setToggleNotification] = useState(false);
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = 'https://mern-stack-news-and-blog-site-1.onrender.com';
   const [isOpen, setIsOpen] = useState(false);
  
   useEffect(() => {
