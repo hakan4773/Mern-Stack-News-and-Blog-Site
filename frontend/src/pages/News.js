@@ -29,7 +29,7 @@ params :{
   setTotalPages(Math.ceil(response.data.totalCount / 5))
   
   if (user) {
-    const responseFavorites = await axios.get(`http://localhost:5000/News/favorites/${user._id}`,{ withCredentials: true });
+    const responseFavorites = await axios.get(`https://mern-stack-news-and-blog-site-1.onrender.com/News/favorites/${user._id}`,{ withCredentials: true });
     setFavorites(responseFavorites.data.favorites || []);
   }
 } catch (error) {
