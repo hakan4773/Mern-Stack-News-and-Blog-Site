@@ -17,7 +17,7 @@ function Footer() {
         email: state.contact.email,
      message:state.contact.message
       };
-      const response = await axios.post(
+     await axios.post(
         "http://localhost:5000/contact",
         contactData,
         {

@@ -22,7 +22,7 @@ fetchCategories();
  setNews({...response.data.news,category:response.data.news.category?._id || ""});
     }
     fetchNews();
-  },[])
+  },[id])
 
 const handleImageChange=(e)=>{
 setİmage(e.target.files[0])
@@ -39,7 +39,7 @@ setİmage(e.target.files[0])
       if (image) {
         formData.append('image', image);
     }      
-       const response = await axios.put(`http://localhost:5000/News/EditPage/${id}`,
+       await axios.put(`http://localhost:5000/News/EditPage/${id}`,
         formData,
         {
             headers: {

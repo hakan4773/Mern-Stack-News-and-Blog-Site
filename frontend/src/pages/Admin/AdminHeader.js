@@ -78,7 +78,9 @@ function AdminHeader() {
                     <img
                       src="image/google.jpg"
                       className="m-2 w-10 h-10 rounded-full cursor-pointer"
+                      alt="google"
                     />
+                    
                     <div className="flex flex-col text-left">
                       {mes.message}
                       <div className="flex ">

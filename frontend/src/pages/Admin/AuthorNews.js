@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { NewsContext } from "../../context/NewsContext";
 
 function AuthorNews() {
-  const { user,setUser } = useContext(NewsContext);
+  const {setUser } = useContext(NewsContext);
     const [news,setNews]=useState([]);
     const [blog,setBlog]=useState([]);
     const [loading,setLoading]=useState(true)
@@ -26,7 +26,7 @@ function AuthorNews() {
  }
  }
  fetchNews();
- },[])
+ },[setUser])
 
   const deletePosts=async(id)=>{
     const confirmDelete=window.confirm("Silmek istediğinizden emin misiniz?")

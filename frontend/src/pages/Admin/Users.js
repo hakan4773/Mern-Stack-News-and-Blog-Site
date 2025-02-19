@@ -65,7 +65,7 @@ if(confirmUsers){
             
             ><MdDelete className='text-red-500' size={20}/></button></td>
           <td className='border-r  border-black '>{user._id}</td>
-          <td className='border-r  border-black '><img src={user.image} className='p-2 w-20 h-20'></img></td>
+          <td className='border-r  border-black '><img src={user.image} alt='users' className='p-2 w-20 h-20'></img></td>
           <td className='border-r  border-black '>       
                <select className='m-2 '>
                 <option className=' p-2' value={user.role}>{user.role}</option>

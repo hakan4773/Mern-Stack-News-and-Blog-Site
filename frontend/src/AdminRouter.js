@@ -17,7 +17,7 @@ import Users from './pages/Admin/Users';
 import ChangePassword from './pages/Admin/ChangePassword';
 import EditBlogPage from './pages/Admin/EditBlogPage';
 function AdminRouter() {
-  const {darkMode,mode}=useContext(NewsContext)
+  const {mode}=useContext(NewsContext)
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 

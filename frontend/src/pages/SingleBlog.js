@@ -77,7 +77,7 @@ function SingleBlog() {
           </h1>
         </div>
 
-        <img src={blog.image} className="w-full h-[400px]"></img>
+        <img src={blog.image} alt="blogs" className="w-full h-[400px]"></img>
         <p className="text-gray-500  ">
           by <span className="font-semibold">Hakan Bulduk</span>
         </p>
@@ -92,7 +92,7 @@ function SingleBlog() {
           <div className="text-xl space-y-4  w-[25%] h-[400px] shadow-lg">
         <h1 className="flex text-center justify-center items-center text-xl font-serif ">Blog Yazarı</h1>
         <div className="flex flex-col justify-center items-center text-center">
-        <img src="/image/5.jpg" className="w-48 h-48 rounded-full"></img>
+        <img src="/image/5.jpg" className="w-48 h-48 rounded-full"  alt="admin"></img>
         <p className="font-serif font-semibold">Ahmet Yazar</p>
         <p className="font-serif ">iletisim@Ahmetyazar.com</p>
 
@@ -151,6 +151,7 @@ function SingleBlog() {
                 <img
                   src={user.image}
                   className="w-10 h-10 rounded-full"
+                  alt="user"
                 ></img>
 
                 <ul>
@@ -192,6 +193,7 @@ function SingleBlog() {
                         <img
                           src="/image/4.jpg"
                           className="w-10 h-10 rounded-full"
+                          alt="comment"
                         ></img>
                         <div className="p-4 w-full ">
                           <textarea

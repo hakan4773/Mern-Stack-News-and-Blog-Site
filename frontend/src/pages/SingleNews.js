@@ -139,6 +139,7 @@ function SingleNews() {
                 <img
                   src={user.image}
                   className="w-10 h-10 rounded-full"
+                  alt="user"
                 ></img>
 
                 <ul>
@@ -180,6 +181,7 @@ function SingleNews() {
                         <img
                           src="/image/4.jpg"
                           className="w-10 h-10 rounded-full"
+                          alt="comment"
                         ></img>
                         <div className="p-4 w-full ">
                           <textarea

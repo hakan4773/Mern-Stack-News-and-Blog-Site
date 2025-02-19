@@ -1,9 +1,9 @@
-import React, { useContext, useState} from 'react'
+import React, { useContext} from 'react'
 import { NewsContext } from "../../context/NewsContext";
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 function ChangePassword() {
-    const { user,setUser ,mode,state} = useContext(NewsContext);  
+    const { user,setUser ,mode} = useContext(NewsContext);  
  
 
     const handleSubmit = async (e) =>{
