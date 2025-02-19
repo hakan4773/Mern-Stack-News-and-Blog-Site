@@ -36,7 +36,7 @@ function Login() {
         number: "",
         image: "",
       };
-      const response = await axios.post(
+      await axios.post(
         `${backendUrl}/users/register`,
         registerData,
         {
@@ -45,6 +45,7 @@ function Login() {
           },
         }
       );
+      
       toggleLoginModal(); // Modal kapatılır.
     } catch (error) {
       if (error.response && error.response.data.errors) {

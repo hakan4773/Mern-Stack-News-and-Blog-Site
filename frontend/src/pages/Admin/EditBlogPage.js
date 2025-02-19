@@ -16,13 +16,14 @@ function EditBlogPage() {
         }
     fetchCategories();
        },[])
+       
        useEffect(()=>{
         const fetchBlog=async()=>{
        const response=await axios.get(`http://localhost:5000/Blog/${id}`);
        setBlog({...response.data.blog,category:response.data.blog.category?._id || ""});
           }
           fetchBlog();
-        },[])
+        },[id])
       
         const handleImageChange=(e)=>{
             setİmage(e.target.files[0])
@@ -38,7 +39,7 @@ function EditBlogPage() {
                   if (image) {
                     formData.append('image', image);
                 }      
-                   const response = await axios.put(`http://localhost:5000/Blog/EditBlogPage/${id}`,
+                    await axios.put(`http://localhost:5000/Blog/EditBlogPage/${id}`,
                     formData,
                     {
                         headers: {

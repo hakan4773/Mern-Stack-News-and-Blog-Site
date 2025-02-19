@@ -6,15 +6,15 @@ import { NewsContext } from "../context/NewsContext";
 import { BsBookmarkFill } from "react-icons/bs";
 
 function News() {
-  const {query,category,AddFavorite,user
-    
-  }=useContext(NewsContext);
+  const {query,category,user}=useContext(NewsContext);
    const [news,setNews]=useState([]);
    const [loading,setLoading]=useState(true)
    const [error,setError]=useState("")
    const [currentPage, setCurrentPage] = useState(1);
    const [totalPages, setTotalPages] = useState(1); 
    const [favorites,setFavorites]=useState([])
+
+
 useEffect(()=>{
   const fetchNews= async()=>{
 try {
@@ -39,7 +39,7 @@ params :{
 }
 }
 fetchNews();
-},[currentPage])
+},[currentPage,user])
 
 
 
@@ -64,9 +64,7 @@ else {
 }
 
 
-useEffect(()=>{
-console.log(favorites)
-},[favorites])
+
 
 
 
