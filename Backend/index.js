@@ -10,7 +10,7 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-
+const expressValidator=require("express-validator")
 //call
 const pageRoutes =require("./Routes/pageRoutes")
 const newsRoutes=require("./Routes/newsRoutes");
@@ -23,7 +23,7 @@ const adminRoutes=require("./Routes/adminRoutes")
 const app=express();
 dotenv.config();
 mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
-const isProduction = process.env.NODE_ENV === 'production';
+
 //Middlewares
 
   app.use(session({
@@ -31,7 +31,7 @@ const isProduction = process.env.NODE_ENV === 'production';
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: false , //isProduction
+      secure: false , 
       maxAge: 1000 * 60 * 60 * 24 * 365, 
     },
     store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
@@ -39,7 +39,7 @@ const isProduction = process.env.NODE_ENV === 'production';
   app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
   app.use(cors({
-    origin: ['http://localhost:3000', 'https://mern-stack-news-and-blog-site.onrender.com'], 
+    origin: 'http://localhost:3000', 
       credentials: true
     }));
 app.use(cookieParser());
@@ -60,12 +60,7 @@ app.use("/contact",contactRoutes)
 
 app.use("/Admin",adminRoutes)
 
-// app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
-//   if (err) { console.log("başarısız", { error: err.message }); }
-// });
 
 
 const PORT=process.env.PORT || 5000;

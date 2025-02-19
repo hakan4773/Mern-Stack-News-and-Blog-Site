@@ -20,7 +20,7 @@ fetchNews();
 
 
   return (
-    <div className='w-screen bg-slate-100 ' >
+    <div className='w-full bg-slate-100 min-w-[400px]' >
     <div className="h-56 sm:h-64 xl:h-80 2xl:h-96  ">
     <Carousel>
       {news.length > 0 ?( 

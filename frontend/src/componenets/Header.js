@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { IoMenu } from "react-icons/io5";
 import Login from "./Login";
 import { NewsContext } from "../context/NewsContext";
 import axios from "axios";
@@ -11,8 +10,8 @@ function Header() {
   const { FilterSelect, Filterİnput } = useContext(NewsContext);
   const [categories, setCategories] = useState([]);
   const [toggleNotification, setToggleNotification] = useState(false);
-  const [menu,setMenu]=useState(false)
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+  const backendUrl = 'http://localhost:5000';
+  const [isOpen, setIsOpen] = useState(false);
  
   useEffect(() => {
     const fetchCategories = async () => {
@@ -30,58 +29,21 @@ function Header() {
   const toggleNotificationHandler = () => {
     setToggleNotification(prev => !prev);
   };
-  const HandleMenu = () => {
-    setMenu((prev) => !prev);
-  };
+
 
   return (
-    <div className="w-screen pb-8  lg:h-24 h-auto bg-red-600  flex flex-wrap justify-between items-center  z-50">
-      {/* <div className="font-thin lg:visible  text-white lg:p-4 py-2 ">
-         <h1 className="">
-          <Link to="/" className="font-semibold lg:text-4xl sm:text-xs  ">
-            <span className="text-blue-500">TEKNO</span><span>NEWS</span>
-          </Link>
-        </h1> 
-      </div> */}
-<div className={`block sm:hidden justify-center text-center  items-center ${menu && 'h-52'}`}>
-<button onClick={HandleMenu}>
-          <IoMenu className="text-white" size={40} />
-        </button>
-        {menu && (
-          <div className="absolute top-14 left-0 w-full   bg-red-600 text-white shadow-lg z-50">
-            <ul className="flex flex-col text-xl">
-              <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">
-                <Link to="/">AnaSayfa</Link>
-              </li>
-              <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">
-                <Link to="/News">Haberler</Link>
-              </li>
-              <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">
-                <Link to="/">Önerilenler</Link>
-              </li>
-              <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">
-                <select
-                  onChange={FilterSelect}
-                  className="bg-red-600 hover:bg-gray-700 text-white p-2 border-none focus:outline-none"
-                >
-                  <option>Kategoriler</option>
-                  {categories.map((category) => (
-                    <option key={category._id} value={category._id} className="bg-white text-black">
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-              </li>
-            </ul>
-          </div>
-        )}
+    <div className="w-full  min-w-[400px] z-50
+     bg-red-600  flex flex-wrap justify-between items-center  ">
 
-</div>
-      <div className=" px-8 lg:p-4 hidden sm:flex sm:flex-wrap   lg:flex-row  text-center items-center mr-auto ">
-        <div id="home"><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1  hover:bg-red-300">AnaSayfa</Link></div>
-        <div id="news"><Link to="/News" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Haberler</Link></div>
-        <div id="recommend"><Link to="/" className="text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Önerilenler</Link></div>
+<div className= "hidden md:flex justify-center text-center items-center container">
 
+
+       <div className="  px-8 lg:p-4  sm:flex sm:flex-wrap   lg:flex-row  text-center items-center mr-auto ">
+        <div id="home"><Link to="/" className="block text-white font-bold lg:text-xl sm:text-sm lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1  hover:bg-red-300">AnaSayfa</Link></div>
+        <div id="news"><Link to="/News" className="block text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Haberler</Link></div>
+        <div id="recommend"><Link to="/" className="block text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Önerilenler</Link></div>
+
+{/* Select */}
         <div className="lg:p-4  font-bold lg:text-xl sm:text-sm ">
           {categories.length === 0 ? (
             <p>Yükleniyor...</p>
@@ -98,12 +60,12 @@ function Header() {
               ))}
             </select>
           )}
+
+
         </div>
 
-       
-      </div>
-
-      <div className="lg:px-5 px-10 md:px-2 hidden sm:block relative">
+    {/* İnput */}    
+ <div className="lg:px-5 px-10  relative">
         <input
           type="text"
           name="filter"
@@ -113,9 +75,11 @@ function Header() {
         />
         <CiSearch className="absolute lg:top-3 lg:left-8   top-3 text-gray-600" size={20} />
       </div>
+       
 
 
-      <div className="relative lg:p-4  lg:mr-0 mr-auto hidden sm:block ">
+{/* bildirim */}
+      <div className="relative lg:p-4  lg:mr-0 flex items-center ">
         <button className="relative lg:hover:bg-red-400 lg:rounded-md   hover:bg-red-300" onClick={toggleNotificationHandler}>
           <IoMdNotificationsOutline className="m-1 text-white" size={30} />
           <span className="absolute top-0 right-0 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
@@ -136,10 +100,126 @@ function Header() {
         )}
       </div>
 
-      {/* relative bottom-[100px] left-0 lg:top-0       //lg:p-2 pr-6*/}
-        <div className="lg:pr-8 pr-3 hidden sm:block  lg:mr-0 mr-auto" ><Login /></div>
+
+
+    {/* Login */}
+        <div className="flex justify-end items-end " ><Login /></div>
   
     </div>
+      </div>
+
+
+
+
+      <button
+            className="md:hidden text-white"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+
+          {isOpen && (
+  <div className="md:hidden    flex flex-col px-4 w-full">
+    {/* Üst Kısım - Bildirim ve Login */}
+    <div className="flex justify-end items-end w-full px-4 gap-3">
+      {/* Bildirim */}
+      <div className="relative">
+        <button className="p-2 hover:bg-red-300 rounded-md transition-colors" onClick={toggleNotificationHandler}>
+          <IoMdNotificationsOutline className="text-white" size={25} />
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+        </button>
+        {toggleNotification && (
+          <ul className="absolute top-12 right-0 bg-white shadow-lg rounded-md py-2 text-black w-64 z-[9999]">
+            <p className="flex justify-center items-center text-center font-bold border-b p-2">Notification</p>
+            <li className="p-3 border-b hover:bg-gray-100 cursor-pointer text-sm">
+              <span className="mr-2 font-bold">1)</span>X kullanıcısından bir mesajınız var
+            </li>
+            <li className="p-3 border-b hover:bg-gray-100 cursor-pointer text-sm">
+              <span className="mr-2 font-bold">2)</span>A:selam
+            </li>
+            <li className="p-3 hover:bg-gray-100 cursor-pointer text-sm">
+              <span className="mr-2 font-bold">3)</span>A:Nasılsın
+            </li>
+          </ul>
+        )}
+      </div>
+      <div><Login /></div>
+    </div>
+
+    {/* Navigasyon Linkleri */}
+    <div className="flex flex-col space-y-3 w-full">
+      <Link to="/" className="text-white hover:text-red-500 transition py-2 text-center">AnaSayfa</Link>
+      <Link to="/News" className="text-white hover:text-red-500 transition py-2 text-center">Haberler</Link>
+      <Link to="/" className="text-white hover:text-red-500 transition py-2 text-center">Önerilenler</Link>
+      {/* Kategoriler Select */}
+    <div className="w-full mx-2">
+      {categories.length === 0 ? (
+        <p className="text-center text-white">Yükleniyor...</p>
+      ) : (
+        <select
+          onChange={FilterSelect}
+          className="w-full bg-red-600 hover:bg-red-400 text-center rounded-md p-2.5 text-white text-sm border-none focus:border-red-600"
+        >
+          <option className="bg-white text-black ">Kategoriler</option>
+          {categories.map(category => (
+            <option key={category._id} value={category._id} className="bg-white text-black">
+              {category.name}
+            </option>
+          ))}
+        </select>
+      )}
+    </div>
+    </div>
+
+
+  
+
+    {/* Arama Kutusu */}
+    <div className="relative w-full p-3 ">
+      <input
+        type="text"
+        name="filter"
+        onChange={Filterİnput}
+        placeholder="Ara..."
+        className="w-full border border-gray-300 rounded-md p-2.5 pl-10 text-gray-800"
+      />
+      <CiSearch className="absolute top-6 left-6 text-gray-600" size={20} />
+    </div>
+  </div>
+)}
+
+
+
+
+
+
+
+      </div>
+
+
+
+ 
   );
 }
 
