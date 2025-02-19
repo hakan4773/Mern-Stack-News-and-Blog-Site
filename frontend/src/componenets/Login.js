@@ -1,15 +1,18 @@
-import React, { useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { IoPersonOutline } from "react-icons/io5";
 import { NewsContext } from "../context/NewsContext";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { IoPerson } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 function Login() {
-const navigate=useNavigate();
-  const { filterChange, state,user,setUser,handleLogout } = useContext(NewsContext);
-  const [toggleDown,setToggleDown]=useState(false)
+  const navigate = useNavigate();
+  const { filterChange, state, user, setUser, handleLogout } =
+    useContext(NewsContext);
+  const [toggleDown, setToggleDown] = useState(false);
+  const [errors, setErrors] = useState([]);
+
   const {
     toggleLoginModal,
     isModalOpen,
@@ -17,21 +20,21 @@ const navigate=useNavigate();
     isRegisterModalOpen,
   } = useContext(NewsContext);
 
+  const backendUrl =
+    process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
-
-  const handleSubmitRegister = async(event) => {
+  const handleSubmitRegister = async (event) => {
     event.preventDefault();
-try {
-    const registerData = {
+    try {
+      const registerData = {
         name: state.register.name,
         email: state.register.email,
         password: state.register.password,
         gender: state.register.gender,
-        role:"user",
-        Address:"",
-        number:"",
-        image:""
+        role: "user",
+        Address: "",
+        number: "",
+        image: "",
       };
       const response = await axios.post(
         `${backendUrl}/users/register`,
@@ -43,77 +46,94 @@ try {
         }
       );
       toggleLoginModal(); // Modal kapatılır.
-} catch (error) {
-    console.log(error)
-}
+    } catch (error) {
+      if (error.response && error.response.data.errors) {
+        setErrors(error.response.data.errors); // Hataları state'e kaydet
+      
+      } else {
+        console.error("bir hata oluştu", error);
+      }
+    }
   };
-  const handleSubmitLogin = async(event) => {
+  console.log(errors)
+  const handleSubmitLogin = async (event) => {
     event.preventDefault();
 
-try {
-    const loginData = { 
+    try {
+      const loginData = {
         email: state.login.email,
         password: state.login.password,
       };
       const response = await axios.post(
         "http://localhost:5000/users/login",
         loginData,
-        { 
+        {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      setUser(response.data.user)
-      toggleLoginModal(); 
-      alert(`Hoşgeldiniz ${user}`)
-  
-} catch (error) {
-    console.log(error)
-    alert(`Giriş başarısız. Lütfen bilgilerinizi kontrol edin. ${error}`,
-    );
+      setUser(response.data.user);
+      toggleLoginModal();
+      alert(`Hoşgeldiniz ${user}`);
+    } catch (error) {
+      console.log(error);
+      alert(`Giriş başarısız. Lütfen bilgilerinizi kontrol edin. ${error}`);
+    }
+  };
 
-}}
+  const toggleSettings = () => setToggleDown(!toggleDown);
 
-
-const toggleSettings = () => setToggleDown(!toggleDown);
-
-
-
-const isAdmin = () => {
-  if (user?.role === "admin" || user?.role === "author") {
-    navigate("/Admin");
-  }
-};
+  const isAdmin = () => {
+    if (user?.role === "admin" || user?.role === "author") {
+      navigate("/Admin");
+    }
+  };
 
   return (
     <div className="lg:pb-2 ">
-{user ?  (
-  <div className=" relative flex items-center ">  
-    <img src={user.image} onClick={toggleSettings} className="w-14 h-14 rounded-full cursor-pointer " alt="User Profile" />
-    <button  className='ml-2  font-semibold text-xl text-white'>
-  
+      {user ? (
+        <div className=" relative flex items-center ">
+          <img
+            src={user.image}
+            onClick={toggleSettings}
+            className="w-14 h-14 rounded-full cursor-pointer "
+            alt="User Profile"
+          />
+          <button className="ml-2  font-semibold text-xl text-white"></button>
+          {toggleDown && (
+            <ul className="absolute  top-14  right-6 z-50 bg-white shadow-lg rounded-md py-2 text-black w-36 ">
+              <li
+                className="flex p-2 hover:bg-gray-100 cursor-pointer"
+                onClick={isAdmin}
+              >
+                <IoPerson className="m-1" /> Profilim
+              </li>
+              <li className="flex p-2 hover:bg-gray-100 cursor-pointer">
+                <IoSettings className="m-1" /> Settings
+              </li>
+              <li
+                className="flex p-2 hover:bg-gray-100 cursor-pointer"
+                onClick={handleLogout}
+              >
+                <IoLogOut className="m-1" />
+                Logout
+              </li>
+            </ul>
+          )}
+        </div>
+      ) : (
+        <button
+          data-modal-target="authentication-modal"
+          data-modal-toggle="authentication-modal"
+          className="flex justify-between border rounded-full p-1 text-red-600 bg-white font-bold text-xl py-2 my-1"
+          type="button"
+          onClick={toggleLoginModal}
+        >
+          <IoPersonOutline className="mx-1" size={25} />
         </button>
-    {toggleDown && (
-      <ul className="absolute  top-14  right-6 z-50 bg-white shadow-lg rounded-md py-2 text-black w-36 ">
-        <li className="flex p-2 hover:bg-gray-100 cursor-pointer" onClick={isAdmin}><IoPerson className="m-1" /> Profilim</li>
-        <li className="flex p-2 hover:bg-gray-100 cursor-pointer"><IoSettings className="m-1" /> Settings</li>
-        <li className="flex p-2 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}><IoLogOut className="m-1" />Logout</li>
-      </ul>
-    )}
-  </div>
-) : (
-  <button
-    data-modal-target="authentication-modal"
-    data-modal-toggle="authentication-modal"
-    className="flex justify-between border rounded-full p-1 text-red-600 bg-white font-bold text-xl py-2 my-1"
-    type="button"
-    onClick={toggleLoginModal}
-  >
-    <IoPersonOutline className="mx-1" size={25} />
-  </button>
-)}
+      )}
 
       {isModalOpen && (
         <div
@@ -130,7 +150,7 @@ const isAdmin = () => {
                 <h3 className="flex text-center justify-center items-center text-xl font-semibold text-gray-900 dark:text-white">
                   Login
                 </h3>
-              
+
                 <button
                   type="button"
                   onClick={toggleLoginModal}
@@ -159,7 +179,7 @@ const isAdmin = () => {
                   className="space-y-4"
                   onSubmit={handleSubmitLogin}
                   encType="multipart/form-data"
->
+                >
                   <div>
                     <label
                       htmlFor="Email"
@@ -261,10 +281,7 @@ const isAdmin = () => {
                 </button>
               </div>
               <div className="p-4 md:p-5">
-                <form
-                  className="space-y-4"
-                  onSubmit={handleSubmitRegister}
-                >
+                <form className="space-y-4" onSubmit={handleSubmitRegister}>
                   <div>
                     <label
                       htmlFor="Name"
@@ -281,6 +298,12 @@ const isAdmin = () => {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       placeholder="Name"
                     />
+{errors.some((error)=>error.path==="name")&&(
+<span style={{color:"red"}}>
+{errors.find((error)=>error.path==="name").msg}
+</span>
+)}
+
                   </div>
 
                   <div>
@@ -299,6 +322,13 @@ const isAdmin = () => {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       placeholder="Email"
                     />
+{errors.some((error)=>error.path==="email")&&(
+<span style={{marginBottom: "10px",color:"red"}}>
+{errors.find((error)=>error.path==="email").msg}
+</span>
+)}
+
+
                   </div>
                   <div>
                     <label
@@ -316,6 +346,11 @@ const isAdmin = () => {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       placeholder="Password"
                     />
+{errors.some((error)=>error.path==="password")&&(
+<span style={{color:"red"}}>
+{errors.find((error)=>error.path==="password").msg}
+</span>
+)}
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

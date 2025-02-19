@@ -52,7 +52,7 @@ exports.Register = async (req, res) => {
     res.status(201).json({ user });
   } catch (error) {
     console.log(error);
-    res.status(401).json({ message: "Kayıt başarısız" });
+    res.status(401).json({ message: "Kayıt başarısız",error:error.message });
   }
 };
 exports.getUsers = async (req, res) => {
