@@ -18,7 +18,7 @@ function News() {
 useEffect(()=>{
   const fetchNews= async()=>{
 try {
-  const response=await axios.get("http://localhost:5000/News",{
+  const response=await axios.get("https://mern-stack-news-and-blog-site-1.onrender.com/News",{
 params :{
   page:currentPage,
   limit:5,

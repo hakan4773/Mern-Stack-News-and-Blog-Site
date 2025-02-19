@@ -18,7 +18,7 @@ function Footer() {
      message:state.contact.message
       };
      await axios.post(
-        "http://localhost:5000/contact",
+        "https://mern-stack-news-and-blog-site-1.onrender.com/contact",
         contactData,
         {
           headers: {
