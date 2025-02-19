@@ -39,7 +39,7 @@ mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
   app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
   app.use(cors({
-    origin: ['http://localhost:3000'], 
+    origin: ['https://mern-frontend.netlify.app'], 
       credentials: true
     }));
 app.use(cookieParser());

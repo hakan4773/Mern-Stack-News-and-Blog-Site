@@ -14,8 +14,8 @@ function Main() {
 useEffect(()=>{
    const fetchNews= async()=>{
 try {
- const responsenews =await axios.get("http://localhost:5000/News?limit=6") 
- const responseblog =await axios.get("http://localhost:5000/Blog")
+ const responsenews =await axios.get("https://mern-stack-news-and-blog-site-1.onrender.com/News?limit=6") 
+ const responseblog =await axios.get("https://mern-stack-news-and-blog-site-1.onrender.com/Blog")
  setNews(responsenews.data.news)  //haberleri kaydet
  setBlog(responseblog.data.blog)  //blog yazıları kaydet
 
