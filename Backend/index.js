@@ -40,7 +40,7 @@ mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({
-  origin: ['https://67b6433b5509020008484df1--news-mern-stack-news-and-blog-site.netlify.app/', 'http://localhost:3000'], // Frontend URL’lerini ekle
+  origin: ['https://news-mern-stack-news-and-blog-site.netlify.app/', 'http://localhost:3000'], // Frontend URL’lerini ekle
   credentials: true,  // Çerezleri (cookies) ve kimlik doğrulama için gerekli
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Kullanılan HTTP metodlarını ekle
   allowedHeaders: ['Content-Type', 'Authorization'] // Gerekli başlıkları ekle
