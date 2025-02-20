@@ -20,9 +20,6 @@ function Login() {
     isRegisterModalOpen,
   } = useContext(NewsContext);
 
-  const backendUrl =
-    process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
-
   const handleSubmitRegister = async (event) => {
     event.preventDefault();
     try {
@@ -37,7 +34,7 @@ function Login() {
         image: "",
       };
       await axios.post(
-        `${backendUrl}/users/register`,
+        `${process.env.REACT_APP_BACKEND_URL}/users/register`,
         registerData,
         {
           headers: {
@@ -66,7 +63,7 @@ function Login() {
         password: state.login.password,
       };
       const response = await axios.post(
-        "http://localhost:5000/users/login",
+        `${process.env.REACT_APP_BACKEND_URL}/users/login`,
         loginData,
         {
           withCredentials: true,

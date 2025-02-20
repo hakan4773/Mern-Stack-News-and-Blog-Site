@@ -17,8 +17,7 @@ function Footer() {
         email: state.contact.email,
      message:state.contact.message
       };
-     await axios.post(
-        "https://mern-stack-news-and-blog-site-1.onrender.com/contact",
+     await axios.post(`${process.env.REACT_APP_BACKEND_URL}/contact`,
         contactData,
         {
           headers: {

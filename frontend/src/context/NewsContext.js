@@ -108,7 +108,7 @@ useEffect(() => {
   useEffect(() => {
     const checkUserSession = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/users/users", {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/users`, {
           withCredentials: true, // Session bilgisi ile istek yap
         });
         if (response.data.user) {

@@ -10,13 +10,13 @@ function Header() {
   const { FilterSelect, Filterİnput } = useContext(NewsContext);
   const [categories, setCategories] = useState([]);
   const [toggleNotification, setToggleNotification] = useState(false);
-  const backendUrl = 'https://mern-stack-news-and-blog-site-1.onrender.com';
+  
   const [isOpen, setIsOpen] = useState(false);
  
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`${backendUrl}/categories`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/categories`);
         setCategories(response.data.categories);
       } catch (error) {
         console.log("Kategori verisi alınamadı:", error);

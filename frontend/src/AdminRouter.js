@@ -23,7 +23,7 @@ function AdminRouter() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/Admin", { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_URL}/Admin`, { withCredentials: true })
       .then(response => {
         setIsAdmin(true);
       })

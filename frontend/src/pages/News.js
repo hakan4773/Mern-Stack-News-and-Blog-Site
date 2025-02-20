@@ -18,7 +18,7 @@ function News() {
 useEffect(()=>{
   const fetchNews= async()=>{
 try {
-  const response=await axios.get("https://mern-stack-news-and-blog-site-1.onrender.com/News",{
+  const response=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/News`,{
 params :{
   page:currentPage,
   limit:5,
@@ -29,7 +29,7 @@ params :{
   setTotalPages(Math.ceil(response.data.totalCount / 5))
   
   if (user) {
-    const responseFavorites = await axios.get(`https://mern-stack-news-and-blog-site-1.onrender.com/News/favorites/${user._id}`,{ withCredentials: true });
+    const responseFavorites = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/News/favorites/${user._id}`,{ withCredentials: true });
     setFavorites(responseFavorites.data.favorites || []);
   }
 } catch (error) {
@@ -50,11 +50,11 @@ const isFavorite = (item) => favorites.some(fav => fav._id === item._id);
 const HandleFavorites=async(item)=>{
   try {
 if(isFavorite(item)){
-  await axios.delete(`http://localhost:5000/News/favorites/${item._id}`, { data: { user } });
+  await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/News/favorites/${item._id}`, { data: { user } });
   setFavorites(favorites.filter(fav=>fav._id!==item._id))
 }
 else {
-  await axios.post("http://localhost:5000/News/favorites", { user, news: item._id });
+  await axios.post(`${process.env.REACT_APP_BACKEND_URL}/News/favorites`, { user, news: item._id });
   setFavorites([...favorites, item]);
 }
 
