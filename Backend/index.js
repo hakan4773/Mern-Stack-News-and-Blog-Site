@@ -22,7 +22,10 @@ const adminRoutes=require("./Routes/adminRoutes")
 // const commentRoutes=require("./Routes/commentRoutes")
 const app=express();
 dotenv.config();
-mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch(err => console.error("MongoDB connection error:", err));
+
 
 //Middlewares
 
@@ -40,15 +43,16 @@ mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({
-  origin: 'https://news-mern-stack-news-and-blog-site.netlify.app/', // Frontend URL’lerini ekle
-  credentials: true,  // Çerezleri (cookies) ve kimlik doğrulama için gerekli
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Kullanılan HTTP metodlarını ekle
+  origin: ['https://news-mern-stack-news-and-blog-site.netlify.app', 'http://localhost:3000'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
+
 
 app.use(cookieParser());
 
 app.use(fileUpload());
-app.use(express.static("public"))
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride("_method",{methods:["GET","POST"]}))
 
 
