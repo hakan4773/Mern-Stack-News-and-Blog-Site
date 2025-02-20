@@ -20,12 +20,12 @@ function SingleNews() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/News/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/News/${id}`);
         const responseNews = await axios.get(
-          "http://localhost:5000/News?limit=4"
+          `${process.env.REACT_APP_BACKEND_URL}/News?limit=4`
         );
         const responseComment = await axios.get(
-          `http://localhost:5000/News/comment/${id}`
+          `${process.env.REACT_APP_BACKEND_URL}/News/comment/${id}`
         );
         setNews(response.data.news); //get news
         setLeftNews(responseNews.data.news); //get left news
@@ -46,7 +46,7 @@ function SingleNews() {
         news: id,
       };
       const response = await axios.post(
-        "http://localhost:5000/News/comment",
+        `${process.env.REACT_APP_BACKEND_URL}/News/comment`,
         commentdata,
         {
           headers: {

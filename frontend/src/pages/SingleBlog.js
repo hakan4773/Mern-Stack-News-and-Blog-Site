@@ -41,8 +41,7 @@ function SingleBlog() {
               comments: newComment,
               blog: id,
             };
-            const response = await axios.post(
-              "http://localhost:5000/Blog/comment",
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Blog/comment`,
               commentdata,
               {
                 headers: {
