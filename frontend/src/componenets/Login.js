@@ -53,8 +53,8 @@ function Login() {
       }
     }
   };
-  const handleSubmitLogin = async () => {
-
+  const handleSubmitLogin = async (event) => {
+event.preventDefault();
     try {
       const loginData = {
         email: state.login.email,
