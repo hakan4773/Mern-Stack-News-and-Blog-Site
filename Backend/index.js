@@ -40,10 +40,9 @@ mongoose.connect(process.env.MONGO_URI).then(()=>console.log("Connected"))
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({
-  origin: ['https://news-mern-stack-news-and-blog-site.netlify.app/', 'https://mern-stack-news-and-blog-site-1.onrender.com'], // Frontend URL’lerini ekle
+  origin: 'https://news-mern-stack-news-and-blog-site.netlify.app/', // Frontend URL’lerini ekle
   credentials: true,  // Çerezleri (cookies) ve kimlik doğrulama için gerekli
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Kullanılan HTTP metodlarını ekle
-  allowedHeaders: ['Content-Type', 'Authorization'] // Gerekli başlıkları ekle
 }));
 
 app.use(cookieParser());

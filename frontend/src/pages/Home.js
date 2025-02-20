@@ -9,7 +9,7 @@ function Home() {
  useEffect(()=>{  
 const fetchNews=async()=>{
 try {
-const response = await axios.get("https://mern-stack-news-and-blog-site-1.onrender.com/News?limit=10")
+const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}https://mern-stack-news-and-blog-site-1.onrender.com/News?limit=10`)
 setNews(response.data.news)
 } catch (error) {
   console.log(error)
