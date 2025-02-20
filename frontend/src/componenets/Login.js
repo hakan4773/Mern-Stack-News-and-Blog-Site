@@ -53,9 +53,7 @@ function Login() {
       }
     }
   };
-  console.log(errors)
-  const handleSubmitLogin = async (event) => {
-    event.preventDefault();
+  const handleSubmitLogin = async () => {
 
     try {
       const loginData = {
@@ -74,7 +72,9 @@ function Login() {
       );
       setUser(response.data.user);
       toggleLoginModal();
-      alert(`Hoşgeldiniz ${user}`);
+      navigate("/");
+
+
     } catch (error) {
       console.log(error);
       alert(`Giriş başarısız. Lütfen bilgilerinizi kontrol edin. ${error}`);
