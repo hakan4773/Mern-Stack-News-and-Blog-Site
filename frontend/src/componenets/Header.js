@@ -64,7 +64,11 @@ function Header() {
 
         </div>
 
-    {/* İnput */}    
+  
+  
+    </div>
+      {/* İnput */}    
+      
  <div className="lg:px-5 px-10  relative">
         <input
           type="text"
@@ -79,7 +83,7 @@ function Header() {
 
 
 {/* bildirim */}
-      <div className="relative lg:p-4  lg:mr-0 flex items-center ">
+      <div className="relative lg:p-4   flex items-center ">
         <button className="relative lg:hover:bg-red-400 lg:rounded-md   hover:bg-red-300" onClick={toggleNotificationHandler}>
           <IoMdNotificationsOutline className="m-1 text-white" size={30} />
           <span className="absolute top-0 right-0 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
@@ -104,8 +108,6 @@ function Header() {
 
     {/* Login */}
         <div className="flex justify-end items-end " ><Login /></div>
-  
-    </div>
       </div>
 
 
