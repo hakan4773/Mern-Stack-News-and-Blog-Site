@@ -44,18 +44,19 @@ const getSingleNews=(id)=>{
   if (loading) return <p>No results found...</p>;
   if (error) return <p>{error}</p>;
   return (
-    <>
-      {/* üST taraftaki div */}
-<div className='flex  w-full p-4 mx-4 overflow-hidden'>
-  <h1 className='font-bold text-red-600 text-2xl p-2'>GÜNCEL HABERLER</h1>
+     
+<div className='flex  w-full overflow-hidden flex-col min-w-[400px]'> {/* üST taraftaki div */}
+<div className='p-2 mx-2'>
+<h1 className='font-bold text-red-600 text-2xl p-2'>GÜNCEL HABERLER</h1>
 </div>
 
-    <div className='flex  justify-between p-6 h-auto'>
+
+    <div className='flex  justify-between p-4 h-auto gap-2 '>
 
     {/* Sol taraftaki div */}
 
 
-    <div  className='grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2  gap-4 w-[70%] h-full'>
+    <div  className='grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2  gap-4 lg:w-[70%] w-[65%] h-full '>
     {filteredNews.length > 0 ? (
   filteredNews.slice(0,6).map((item) => (
       <div key={item._id} className='shadow-sm rounded-md bg-white lg:w-[300px] w-60 h-auto hover:shadow-xl' >
@@ -73,8 +74,8 @@ const getSingleNews=(id)=>{
 )}    </div>
 
     {/* Sağ taraftaki div */}
-    <div className='lg:w-[20%] w-52   p-4 h-full shadow-sm bg-white'>
-      <h1 className='text-red-500 font-bold text-xl'>Günün Öne Çıkan Haberleri</h1>
+    <div className='lg:w-[20%]  mt-4  h-full shadow-sm w-[35%] '>
+      <h1 className='text-red-500 font-bold text-xl'>En çok tıklananlar</h1>
       {news.length > 0 ? (
   news.slice(0, 3).map((item) => (
 <div className=' p-1' key={item._id}>       
@@ -101,7 +102,9 @@ const getSingleNews=(id)=>{
   <h1 className='font-bold text-red-600 text-2xl'>BLOG YAZILAR</h1>
 
   </div>
-  <div className='flex  justify-between p-6 h-auto'>
+ 
+  <div className='flex  justify-between p-4 h-auto gap-2 '>
+
 <div className='grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-4 w-[70%] h-full'>
 {filteredBlog.length > 0 ? (
   filteredBlog.map((item) => (
@@ -121,7 +124,7 @@ const getSingleNews=(id)=>{
 
 
 {/* Günün Sözü bölümü */}
-<div className='lg:w-[20%] w-52 p-2 h-full shadow-sm bg-white'>
+<div className='lg:w-20%] w-52 p-2 h-full shadow-sm bg-white'>
       <h4 className='text-red-500 font-bold text-xl'>Günün Sözleri</h4>
       <div>
 <p>İnsanın özgürlüğü; istediği her şeyi yapabilmesinde değil, istemediği hiçbir şeyi yapmak zorunda olmamasındadır.	</p>        
@@ -130,7 +133,7 @@ const getSingleNews=(id)=>{
 </div>
 </div>
   
-  </>
+</div>
   )
 }
 

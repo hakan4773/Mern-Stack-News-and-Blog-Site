@@ -29,7 +29,7 @@ fetchNews();
       <div  className="relative flex h-full items-center justify-center  bg-gray-400 dark:bg-gray-700 dark:text-white">
      <img className='w-auto object-cover ' src={item.image} alt={item.category.name}>
      </img>  
-     <div className='absolute inset-0 text-4xl w-[500px] flex  text-center justify-center items-center'>
+     <div className='absolute inset-0 lg:text-4xl lg:w-[500px] w-[300px] flex  text-center justify-center items-center'>
      <h1 className=' text-white '>{item.title} </h1>
      </div>
    </div>
