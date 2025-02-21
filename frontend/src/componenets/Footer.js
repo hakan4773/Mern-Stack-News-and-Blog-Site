@@ -31,12 +31,12 @@ function Footer() {
   };
 
   return (
-    <footer className="w-screen  text-white bg-red-600  p-2 overflow-hidden">
+    <footer className="w-screen  text-white bg-red-600  p-2 min-w-[400px]">
       {/* Tüm içeriği aynı hizada tutmak için flex */}
       <div className="flex  flex-wrap  lg:flex-row justify-around items-start">
         {/* Bize Ulaşın */}
-        <form onSubmit={handleSubmit} className="sm:w-full lg:w-1/4 ">
-          <div className="flex flex-col w-[280px] lg:p-4 space-y-4 text-black">
+        <form onSubmit={handleSubmit} className="w-full lg:w-1/4 ">
+          <div className="flex flex-col w-[280px] lg:p-4 p-4 space-y-4 text-black">
             <h1 className="text-white text-xl">Bize Ulaşın</h1>
             <hr className="w-80" />
             <input
@@ -146,13 +146,13 @@ function Footer() {
         </div>
       </div>
 
-      <div className="flex flex-row lg:space-x-4 sm:space-x-2 justify-center">
+      <div className="flex flex-row lg:space-x-4 sm:space-x-2 pt-6 justify-center">
         <Link>Gizlilik Politikası</Link>
-        <div className="border-l"></div>
+        <div className="border-l pr-2"></div>
         <Link>Çerezlerin Kullanımı</Link>
-        <div className="border-l"></div>
+        <div className="border-l pr-2"></div>
         <Link>Kullanım Şartları</Link>
-        <div className="border-l"></div>
+        <div className="border-l pr-2"></div>
         <Link>Site Haritası</Link>
       </div>
 

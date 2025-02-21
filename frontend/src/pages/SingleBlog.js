@@ -64,19 +64,20 @@ function SingleBlog() {
 
 
   return (
-    <div className="flex  p-10 w-full">
-      <div className=" h-auto  space-y-2  p-6 ">
+    <div className="flex  lg:p-10 w-full min-w-[400px]">
+      <div className=" h-auto  space-y-2  lg:p-6 p-2 ">
+       
         <p className="text-gray-500 font-semibold p-2">
           <Link to={"/"}> Anasayfa</Link> {">"}
           <Link>{blog?.category?.name || "Kategori Yok"} </Link> 
         </p>
-        <div className="w-[800px]">
+        <div className="lg:w-[800px] w-[300px]">
           <h1 className="font-bold text-4xl ">
            {blog.title}
           </h1>
         </div>
 
-        <img src={blog.image} alt="blogs" className="w-full h-[400px]"></img>
+        <img src={blog.image} alt="blogs" className="w-full lg:h-[400px]"></img>
         <p className="text-gray-500  ">
           by <span className="font-semibold">Hakan Bulduk</span>
         </p>
@@ -86,20 +87,21 @@ function SingleBlog() {
           <span className="font-semibold"> 20 Ekim 2024 Pazar 23.00 </span>
         </p>
         <div className="flex flex-row  py-6 space-x-8 h-auto">
-          <div className="text-xl space-y-4 w-[75%] h-full" dangerouslySetInnerHTML={{ __html: blog.content }} />
+          <div className="text-xl space-y-4 lg:w-[75%] w-[65%] h-full" dangerouslySetInnerHTML={{ __html: blog.content }} />
 
-          <div className="text-xl space-y-4  w-[25%] h-[400px] shadow-lg">
-        <h1 className="flex text-center justify-center items-center text-xl font-serif ">Blog Yazarı</h1>
-        <div className="flex flex-col justify-center items-center text-center">
-        <img src="/image/5.jpg" className="w-48 h-48 rounded-full"  alt="admin"></img>
-        <p className="font-serif font-semibold">Ahmet Yazar</p>
-        <p className="font-serif ">iletisim@Ahmetyazar.com</p>
-
-
-
-        </div>
-
-          </div>
+          <div className="text-xl space-y-4 lg:w-[25%] w-[45%] ">
+  <div className="text-center shadow-lg p-2">
+  <h1 className="text-xl font-serif font-bold mb-4">Blog Yazarı</h1>
+  
+    <img
+      src="/image/5.jpg"
+      className="w-24  rounded-full mx-auto mb-4"
+      alt="admin"
+    />
+    <p className="font-serif font-semibold">Ahmet Yazar</p>
+    <p className="font-serif truncate text-gray-600">iletisim@Ahmetyazar.com</p>
+  </div>
+</div>
 
         </div>
    
