@@ -80,7 +80,7 @@ const getSingleNews=(id)=>{
   news.slice(0, 3).map((item) => (
 <div className=' p-1' key={item._id}>       
 <img src={item.image} className="w-full object-cover rounded-t-md h-28"  alt={item?.category?.name} />
-<Link to={`/news/${item._id}`} className=' hover:font-semibold '>{item.title}
+<Link to={`/news/${item._id}`} className=' hover:font-semibold '>  {item.title.substring(0,30)+"..."}
 </Link>
 </div>
   ))

@@ -65,16 +65,16 @@ function SingleNews() {
   };
 
   return (
-    <div className="flex  p-10 ">
-      <div className="w-[80%] h-auto  space-y-2  p-6 ">
+    <div className="flex lg:flex-row flex-col  lg:p-10 min-w-[400px] ">
+      <div className="lg:w-[80%] h-auto  space-y-2  p-6 ">
         <p className="text-gray-500 font-semibold p-2">
           <Link to={"/"}> Anasayfa</Link> {">"}
           <Link>{news?.category?.name || "Kategori Yok"} </Link>
         </p>
-        <div className="w-[800px]">
-          <h1 className="font-bold text-4xl ">{news.title}</h1>
+        <div className="lg:w-[800px] w-[380px]">
+          <h1 className="font-bold lg:text-4xl text-xl">{news.title}</h1>
         </div>
-        <img src={news.image} className="w-full h-[400px]" alt=""></img>
+        <img src={news.image} className="w-full lg:h-[400px]" alt=""></img>
         <p className="text-gray-500  ">
           by{" "}
           <span className="font-semibold">
@@ -85,12 +85,19 @@ function SingleNews() {
           Yayınlanma Tarihi
           <span className="font-semibold"> {news.createdAt} </span>
         </p>
-        <div className="px-20 py-6">
+        <div className="lg:px-20 py-6">
           <h1 className=" text-3xl py-4">{news.subtitle}</h1>
+        
           <div
             className="text-xl space-y-4"
-            dangerouslySetInnerHTML={{ __html: news.content }}
+             dangerouslySetInnerHTML={{ __html: news.content }}
           />
+
+
+
+
+
+
         </div>
         {/* Yorum Paneli */}
 
@@ -229,22 +236,28 @@ function SingleNews() {
             </button>
           </div>
         </div>
+
+
+
+        
       </div>
 
-      <div className="w-[20%]  p-4 h-full">
-        <h1 className="text-red-500 font-bold text-xl">
-          Günün Öne Çıkan Haberleri
+      <div className="lg:w-[20%] w-full lg:p-4 h-full lg:mt-52 flex flex-col  ">
+        <h1 className="text-red-500 font-bold text-xl mx-4">
+         En çok tıklananlar
         </h1>
 
         {leftnews.length > 0 ? (
           leftnews.slice(1, 4).map((item) => (
-            <div key={item.id} className="mb-4 hover:shadow-md">
+            <div key={item.id} className="mb-4 hover:shadow-md p-6">
               <img
                 src={item.image}
-                className="w-full object-cover rounded-t-md"
+                className="lg:w-full object-cover rounded-t-md"
                 alt={item?.category?.name}
               />
-              <Link to={`/news/${item._id}`} className="font-bold ">
+              <Link to={`/news/${item._id}`} className="font-serif lg:w-full w-44  text-gray-600 
+             
+              ">
                 {item.title}
               </Link>
             </div>
