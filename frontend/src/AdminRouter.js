@@ -18,7 +18,7 @@ import ChangePassword from './pages/Admin/ChangePassword';
 import EditBlogPage from './pages/Admin/EditBlogPage';
 function AdminRouter() {
   const {mode}=useContext(NewsContext)
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +29,8 @@ function AdminRouter() {
       })
       .catch(error => {
         console.error("Erişim engellendi: ", error.response?.data?.message || error.message);
-        navigate("/");
+        setIsAdmin(false);  // Set to false on error
+        navigate("/");  // Redirect to home
       });
   }, [navigate]);
 
