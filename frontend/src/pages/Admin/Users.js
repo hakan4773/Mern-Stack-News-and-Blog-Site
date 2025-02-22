@@ -11,7 +11,7 @@ function Users() {
      const fetchUser=async()=>{
   try
   {
-      const responseUsers =await axios.get("http://localhost:5000/users/users",{ withCredentials: true })
+      const responseUsers =await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/users`,{ withCredentials: true })
       setUserİnformation(responseUsers.data.userİnformation);
       console.log(responseUsers.data.userİnformation)
   }
@@ -28,7 +28,7 @@ const deleteUsers=async(id)=>
 
 if(confirmUsers){
   try {
-  await axios.delete(`http://localhost:5000/users/users/${id}`)
+  await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/users/users/${id}`)
   setUserİnformation(userİnformation.filter(user=>user._id!==id))
 } catch (error) {
   console.log("Kategori silinemedi",error.message)

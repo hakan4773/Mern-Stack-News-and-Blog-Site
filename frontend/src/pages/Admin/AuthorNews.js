@@ -14,8 +14,8 @@ function AuthorNews() {
     useEffect(()=>{
    const fetchNews= async()=>{
  try {
-   const response=await axios.get("http://localhost:5000/Admin", { withCredentials: true });
-   const responseBlog=await axios.get("http://localhost:5000/Blog", { withCredentials: true });
+   const response=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Admin`, { withCredentials: true });
+   const responseBlog=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Blog`, { withCredentials: true });
    setUser(response.data.user);
    setNews(response.data.user.news)
    setBlog(responseBlog.data.blog)
@@ -33,7 +33,7 @@ function AuthorNews() {
     console.log(id)
 if(confirmDelete){
   try {
-    await axios.delete(`http://localhost:5000/${selectedType}/AuthorNews/${id}`);
+    await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/${selectedType}/AuthorNews/${id}`);
    selectedType==="News" ? setNews(news.filter(item => item._id !== id)) : setBlog(blog.filter(item => item._id !== id))
     console.log("Haber başarıyla silindi")
   } catch (error) {

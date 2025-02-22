@@ -10,7 +10,7 @@ function ChangePassword() {
       e.preventDefault();
       try {
         const response = await axios.put(
-            `http://localhost:5000/users/update-password`,
+            `${process.env.REACT_APP_BACKEND_URL}/users/update-password`,
             {
               oldPassword: user.oldPassword,
               newPassword: user.newPassword,

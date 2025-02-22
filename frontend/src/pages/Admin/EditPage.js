@@ -11,14 +11,14 @@ const [news,setNews]=useState({title:"" ,subtitle:"",content:"",category:"",imag
 
   useEffect(()=>{
     const fetchCategories=async()=>{
- const responseCategory=await axios.get("http://localhost:5000/categories");
+ const responseCategory=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/categories`);
 setCategories(responseCategory.data.categories);
     }
 fetchCategories();
    },[])
   useEffect(()=>{
   const fetchNews=async()=>{
- const response=await axios.get(`http://localhost:5000/News/${id}`);
+ const response=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/News/${id}`);
  setNews({...response.data.news,category:response.data.news.category?._id || ""});
     }
     fetchNews();
@@ -39,7 +39,7 @@ setİmage(e.target.files[0])
       if (image) {
         formData.append('image', image);
     }      
-       await axios.put(`http://localhost:5000/News/EditPage/${id}`,
+       await axios.put(`${process.env.REACT_APP_BACKEND_URL}/News/EditPage/${id}`,
         formData,
         {
             headers: {

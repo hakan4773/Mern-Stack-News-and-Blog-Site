@@ -11,7 +11,7 @@ const [image,setİmage]=useState();
 
   useEffect(()=>{
     const fetchCategories=async()=>{
- const responseCategory=await axios.get("http://localhost:5000/categories");
+ const responseCategory=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/categories`);
 setCategories(responseCategory.data.categories);
     }
 fetchCategories();
@@ -33,7 +33,7 @@ setİmage(e.target.files[0])
       formData.append('image', image);  
       formData.append('user',  user._id); 
        const response = await axios.post(
-        "http://localhost:5000/News/AddNews",
+        `${process.env.REACT_APP_BACKEND_URL}/News/AddNews`,
         formData,
         {
           headers: {

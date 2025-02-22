@@ -15,7 +15,7 @@ function Profile() {
           formData.append('number', user.number);
           formData.append('Address',user.Address);
      
-           const response = await axios.put(`http://localhost:5000/users/users/${user._id}`,
+           const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/users/users/${user._id}`,
             formData,
             {
                 headers: {

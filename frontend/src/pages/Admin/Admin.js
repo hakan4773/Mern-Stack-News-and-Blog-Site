@@ -13,9 +13,9 @@ function Admin() {
   useEffect(() => {
    const fetchCount=async()=>{
 try{
-  const responseNews =await axios.get("http://localhost:5000/News")
-  const responseBlog =await axios.get("http://localhost:5000/Blog")
-  const responseUsers =await axios.get("http://localhost:5000/users/users",{ withCredentials: true })
+  const responseNews =await axios.get(`${process.env.REACT_APP_BACKEND_URL}/News`,{ withCredentials: true })
+  const responseBlog =await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Blog`,{ withCredentials: true })
+  const responseUsers =await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/users`,{ withCredentials: true })
     setNews(responseNews.data.news);
     setBlog(responseBlog.data.blog);
     setAllusers(responseUsers.data.Allusers);

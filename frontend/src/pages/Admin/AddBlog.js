@@ -10,7 +10,7 @@ function AddBlog() {
     
       useEffect(()=>{
         const fetchCategories=async()=>{
-     const responseCategory=await axios.get("http://localhost:5000/categories");
+     const responseCategory=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/categories`);
     setCategories(responseCategory.data.categories);
         }
     fetchCategories();
@@ -29,7 +29,7 @@ function AddBlog() {
           formData.append('image', image); 
           formData.append('user',  user._id); 
            const response = await axios.post(
-            "http://localhost:5000/Blog/AddBlog",
+            `${process.env.REACT_APP_BACKEND_URL}/Blog/AddBlog`,
             formData,
             {
               headers: {
