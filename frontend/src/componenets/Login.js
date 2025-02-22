@@ -53,8 +53,9 @@ function Login() {
       }
     }
   };
+  
   const handleSubmitLogin = async (event) => {
-event.preventDefault();
+    event.preventDefault();
     try {
       const loginData = {
         email: state.login.email,
@@ -72,7 +73,7 @@ event.preventDefault();
       );
       setUser(response.data.user);
       toggleLoginModal();
-      navigate("/");
+     // window.location.reload();
 
 
     } catch (error) {

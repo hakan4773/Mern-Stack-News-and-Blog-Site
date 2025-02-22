@@ -6,12 +6,12 @@ const initialState ={
 favorites: [],
 query:"",
 category:"",
-login:{},
-register:{},
 news:{},
 blog:{},
 contact:{},
 users:{},
+    login: { email: "", password: "" },
+    register: { name: "", email: "", password: "", gender: "" }
 }
 export const NewsProvider =({children})=>{
   function NewsReducer(state,action){
@@ -102,7 +102,7 @@ useEffect(() => {
 
 
 
-  const [user, setUser] = useState(initialState.login);
+  const [user, setUser] = useState(null);
 
   //Giriş yapan kullanıcı bilgisini alma
   useEffect(() => {

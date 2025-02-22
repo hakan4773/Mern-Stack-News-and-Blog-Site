@@ -28,27 +28,20 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 //Middlewares
+app.use(cors({
+  origin: [ 'http://localhost:3000','https://news-mern-stack-news-and-blog-site.netlify.app'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ["Content-Type", "Authorization","Cookie"]
 
-  app.use(session({
-    secret: 'my_cat', 
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: false , 
-      maxAge: 1000 * 60 * 60 * 24 * 365, 
-    },
-    store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
-  }));
+}));
+
+
+
   app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-app.use(cors({
-  origin: ['https://news-mern-stack-news-and-blog-site.netlify.app', 'http://localhost:3000'],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ["Content-Type", "Authorization"]
 
-}));
 
 
 app.use(cookieParser());
@@ -56,7 +49,16 @@ app.use(cookieParser());
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride("_method",{methods:["GET","POST"]}))
-
+app.use(session({
+  secret: 'my_cat', 
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false , 
+    maxAge: 1000 * 60 * 60 * 24 * 365, 
+  },
+  store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
+}));
 
 
 app.use("/",pageRoutes)

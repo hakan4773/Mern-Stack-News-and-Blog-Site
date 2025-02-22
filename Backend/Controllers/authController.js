@@ -5,32 +5,40 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 dotenv.config();
+
+
 exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+
     if (!user) {
       return res.status(404).json({ message: "Kullanıcı bulunamadı" });
     }
-    const same = await bcrypt.compare(password, user.password);
-    if (!same) {
-      return res.status(200).json({ message: "Hatalı şifre" })
-      
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Şifre hatalı" });
     }
 
-    //session
+    // Session Kaydet
     req.session.user = user;
     req.session.userId = user._id;
     req.session.role = user.role;
     req.session.isAuthenticated = true;
-    return res.status(200).json({ message: "Giriş başarılı" });
+    
+    console.log("🔥 Session after login:", req.session); // **Debug için ekledik**
 
+    return res.status(200).json({ message: "Giriş başarılı", user: req.session.user });
 
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Giriş yapılamadı" });
   }
 };
+
+
+
 exports.Register = async (req, res) => {
   try {
     const { name, email, password, gender } = req.body;
@@ -57,21 +65,22 @@ exports.Register = async (req, res) => {
 };
 exports.getUsers = async (req, res) => {
   try {
+
     if (req.session && req.session.userId) {
-      const Allusers = await User.find().countDocuments()
-      const userİnformation =await User.find()
+      const allUsers = await User.find().countDocuments();
+      const userInformation = await User.find();
       const user = await User.findById(req.session.userId);
+
       if (!user) {
-        return res.status(404).json({ message: "Kullanıcı bulunamadı" ,});
+        return res.status(404).json({ message: "Kullanıcı bulunamadı" });
       }
-      console.log(user)
-      res.json({ user,Allusers ,userİnformation}); // Sadece oturum açmış olan kullanıcıyı döndür
+      return res.json({ user, allUsers, userInformation });
     } else {
-      res.json({ user: null }); // Oturum açılmamışsa null döndür
+      return res.json({ user: null });
     }
   } catch (error) {
-    console.error("Kullanıcı bilgisi alınırken hata:", error);
-    res.status(500).json({ message: "Kullanıcı bilgisi alınamadı" });
+    console.error("🚨 Kullanıcı bilgisi alınırken hata:", error);
+    return res.status(500).json({ message: "Kullanıcı bilgisi alınamadı" });
   }
 };
 
