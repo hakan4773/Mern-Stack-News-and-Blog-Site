@@ -11,7 +11,7 @@ function EditBlogPage() {
 
     useEffect(()=>{
         const fetchCategories=async()=>{
-     const responseCategory=await axios.get("http://localhost:5000/categories");
+     const responseCategory=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/categories`);
     setCategories(responseCategory.data.categories);
         }
     fetchCategories();
@@ -19,7 +19,7 @@ function EditBlogPage() {
        
        useEffect(()=>{
         const fetchBlog=async()=>{
-       const response=await axios.get(`http://localhost:5000/Blog/${id}`);
+       const response=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Blog/${id}`);
        setBlog({...response.data.blog,category:response.data.blog.category?._id || ""});
           }
           fetchBlog();
@@ -39,7 +39,7 @@ function EditBlogPage() {
                   if (image) {
                     formData.append('image', image);
                 }      
-                    await axios.put(`http://localhost:5000/Blog/EditBlogPage/${id}`,
+                    await axios.put(`${process.env.REACT_APP_BACKEND_URL}/Blog/EditBlogPage/${id}`,
                     formData,
                     {
                         headers: {

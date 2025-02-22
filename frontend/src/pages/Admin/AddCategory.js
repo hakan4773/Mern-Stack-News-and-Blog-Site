@@ -8,7 +8,7 @@ function AddCategory() {
     const [categories,setCategories]=useState([]);
     useEffect(()=>{
     const fetchCategories=async()=>{
-     const responseCategory=await axios.get("http://localhost:5000/categories");
+     const responseCategory=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/categories`);
     setCategories(responseCategory.data.categories);
         }
     fetchCategories();
@@ -20,7 +20,7 @@ function AddCategory() {
           const formData = new FormData();
           formData.append('name', state.category.name);
            const response = await axios.post(
-            "http://localhost:5000/categories/AddCategory",
+            `${process.env.REACT_APP_BACKEND_URL}/categories/AddCategory`,
             formData,
           );
           console.log("API Yanıtı:", response.data.category);
@@ -33,7 +33,7 @@ const deleteCategory=async(id)=>{
 const confirmDelete=window.confirm("Silmek istediğinizden Emin Misiniz ?")
 if(confirmDelete){
   try {
-    await axios.delete(`http://localhost:5000/categories/AddCategory/${id}`)
+    await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/categories/AddCategory/${id}`)
 setCategories(categories.filter(category=>category._id!==id))
   } catch (error) {
     console.log("Kategori silinemedi",error.message)

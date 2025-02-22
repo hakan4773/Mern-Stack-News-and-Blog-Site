@@ -18,7 +18,7 @@ function AdminHeader() {
   useEffect(() => {
     try {
       const fetchMessage = async () => {
-        const response = await axios.get("http://localhost:5000/contact");
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/contact`);
         setMessage(response.data.contact || []);
       };
       fetchMessage();
