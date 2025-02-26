@@ -12,5 +12,6 @@ haber ve bloglarını görüntüleyebilir,düzenleyebilir,silebilir ve çeşitli
 <b>Tools and Editor: </b> NPM,Postman ,VS Code <br />
 
 <h3>Görseller</h3>
-![Ekran görüntüsü 2025-02-16 211644](https://github.com/user-attachments/assets/7e897b25-e70f-419c-b0c1-233357c159b4)
+https://github.com/user-attachments/assets/7e897b25-e70f-419c-b0c1-233357c159b4
+https://github.com/user-attachments/assets/c4b5e2fc-40b0-492b-848b-f534160b3182
 
