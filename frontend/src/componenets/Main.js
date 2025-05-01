@@ -56,25 +56,41 @@ const getSingleNews=(id)=>{
     {/* Sol taraftaki div */}
 
 
-    <div  className='grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2  gap-4 lg:w-[70%] w-[65%] h-full '>
-    {filteredNews.length > 0 ? (
-  filteredNews.slice(0,6).map((item) => (
-      <div key={item._id} className='shadow-sm rounded-md bg-white lg:w-[300px] w-60 h-auto hover:shadow-xl' >
-        <button onClick={()=>getSingleNews(item._id)}  >
-          <img className="w-full h-40 object-cover rounded-t-md" src={item.image} alt="Tech" />
-          <p className='text-gray-500 font-semibold p-2 text-left'>{item?.category?.name || "Kategori Yok"}</p>
-          <div className='flex text-center justify-center items-center'>
-          <h1 className='text-black  text-xl p-1 text-left'>{item.title}</h1>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-5xl mx-auto">
+  {filteredNews.length > 0 ? (
+    filteredNews.slice(0, 6).map((item) => (
+      <div
+        key={item._id}
+        className="bg-white rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full"
+      >
+        <button
+          onClick={() => getSingleNews(item._id)}
+          className="w-full text-left"
+          aria-label={`View details for ${item.title}`}
+        >
+          <img
+            className="w-full h-40 sm:h-48 object-cover rounded-t-lg"
+            src={item.image}
+            alt={item.title || "News image"}
+          />
+          <div className="p-4">
+            <p className="text-gray-500 font-semibold text-sm sm:text-base">
+              {item?.category?.name || "Kategori Yok"}
+            </p>
+            <h1 className="text-black text-lg sm:text-xl font-bold mt-2 line-clamp-2">
+              {item.title}
+            </h1>
           </div>
         </button>
       </div>
-  ))
-) : (
-  <p>No results found...</p> // Veri gelene kadar bir yükleme mesajı göster
-)}    </div>
+    ))
+  ) : (
+    <p className="col-span-full text-center text-gray-500">Sonuç bulunamadı...</p>
+  )}
+</div>
 
     {/* Sağ taraftaki div */}
-    <div className='lg:w-[20%]  mt-4  h-full shadow-sm w-[35%] '>
+    <div className='lg:w-[20%]  mt-4  h-full shadow-sm w-[35%] hidden md:block bg-white p-2'>
       <h1 className='text-red-500 font-bold text-xl'>En çok tıklananlar</h1>
       {news.length > 0 ? (
   news.slice(0, 3).map((item) => (
@@ -103,34 +119,57 @@ const getSingleNews=(id)=>{
 
   </div>
  
-  <div className='flex  justify-between p-4 h-auto gap-2 '>
-
-<div className='grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-4 w-[70%] h-full'>
-{filteredBlog.length > 0 ? (
-  filteredBlog.map((item) => (
-  <div key={item._id} className='border lg:w-[300px] w-60 h-auto rounded-md hover:shadow-xl shadow-sm bg-white'>
-  <Link to={`/Blog/${item._id}`}>
-    <img className="w-full h-40 object-cover rounded-t-md" src={item.image || "No image"} alt="Tech" />
-     <p className='text-gray-500 font-semibold p-2 '>{item?.category?.name || "Kategori Yok"}</p>
-     <h1 className='text-black text-xl p-2'>
-{item.title}
-    </h1>
-    </Link>
+  <div className="flex flex-col md:flex-row justify-between p-4 gap-6  mx-auto">
+  {/* Blog Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full md:w-[70%]">
+    {filteredBlog.length > 0 ? (
+      filteredBlog.map((item) => (
+        <div
+          key={item._id}
+          className="bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full"
+        >
+          <Link
+            href={`/Blog/${item._id}`}
+            aria-label={`Read blog post: ${item.title}`}
+          >
+            <img
+              className="w-full h-40 sm:h-48 object-cover rounded-t-lg"
+              src={item.image || "/fallback-image.jpg"}
+              alt={item.title || "Blog image"}
+            />
+            <div className="p-4">
+              <p className="text-gray-500 font-semibold text-sm sm:text-base">
+                {item?.category?.name || "Kategori Yok"}
+              </p>
+              <h1 className="text-black text-lg sm:text-xl font-bold mt-2 line-clamp-2">
+                {item.title}
+              </h1>
+            </div>
+          </Link>
+        </div>
+      ))
+    ) : (
+      <p className="col-span-full text-center text-gray-500">
+        Sonuç bulunamadı...
+      </p>
+    )}
   </div>
 
-))): (
-  <p>No results found...</p> )}
-</div>
-
-
-{/* Günün Sözü bölümü */}
-<div className='lg:w-20%] w-52 p-2 h-full shadow-sm bg-white'>
-      <h4 className='text-red-500 font-bold text-xl'>Günün Sözleri</h4>
-      <div>
-<p>İnsanın özgürlüğü; istediği her şeyi yapabilmesinde değil, istemediği hiçbir şeyi yapmak zorunda olmamasındadır.	</p>        
-  <p className='flex text-end justify-end font-serif'>Jean-Jacques Rousseau</p>  
-      </div>
-</div>
+  {/* Günün Sözü (Quote of the Day) */}
+  <div className="w-full md:w-[25%] p-4 bg-white rounded-lg shadow-sm">
+    <h4 className="text-red-500 font-bold text-lg sm:text-xl mb-4">
+      Günün Sözleri
+    </h4>
+    <div>
+      <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+        İnsanın özgürlüğü; istediği her şeyi yapabilmesinde değil, istemediği
+        hiçbir şeyi yapmak zorunda olmamasındadır.
+      </p>
+      <p className="text-right text-gray-500 font-serif text-sm sm:text-base mt-2">
+        Jean-Jacques Rousseau
+      </p>
+    </div>
+  </div>
 </div>
   
 </div>
