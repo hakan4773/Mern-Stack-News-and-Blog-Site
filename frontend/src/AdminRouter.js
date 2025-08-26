@@ -36,7 +36,7 @@ function AdminRouter() {
   }, [navigate]);
 
   return isAdmin ? (
-    <div className={`flex h-full ${mode ? 'bg-zinc-700 text-white' : 'bg-white text-black'}`}>      
+    <div className={`flex h-full ${mode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>      
       <Navbar open={open} setOpen={setOpen} />
       <div className="flex-1 flex flex-col ">
       <AdminHeader  open={open} setOpen={setOpen} />

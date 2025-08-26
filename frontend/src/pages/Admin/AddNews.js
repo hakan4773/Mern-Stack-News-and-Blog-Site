@@ -52,7 +52,7 @@ setİmage(e.target.files[0])
     }
   };
   return (
-    <div className="flex flex-col w-full justify-center items-center text-center p-4">
+    <div className="flex flex-col lg:w-full  w-[500px] justify-center items-center text-center p-4">
       <form
         className=" w-full rounded-lg    mx-auto p-2"
         encType="multipart/form-data"
@@ -61,23 +61,19 @@ setİmage(e.target.files[0])
       >
 
         
-        <div >
-          <label
-            htmlFor="small-input"
-            className="block mb-2 text-sm font-medium  dark:text-white"
-          >
-            Title
-          </label>
-          <input
-            type="text"
-            id="small-input"
-            name="title"
-            placeholder="title..."
-            value={state.news.title || ""}
-            onChange={(e) => filterChange(e, "news")}
-            className="block w-full p-2 text-black border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          />
-        </div>
+         <div className="mb-4">
+      <label className="block mb-2 text-sm font-medium dark:text-white">
+        Title
+      </label>
+      <input
+        type="text"
+        name="title"
+        placeholder="Title..."
+        value={state.news.title || ""}
+        onChange={(e) => filterChange(e, "news")}
+        className="block w-full p-2 text-black border border-gray-300 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      />
+    </div>
         <div className="mb-5">
           <label
             htmlFor="base-input"

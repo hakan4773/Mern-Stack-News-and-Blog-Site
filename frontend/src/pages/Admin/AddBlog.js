@@ -43,7 +43,7 @@ function AddBlog() {
         }
       };
   return (
-    <div className="flex flex-col w-full justify-center items-center text-center p-4">
+    <div className="flex flex-col lg:w-full  w-[500px] justify-center items-center text-center p-4">
     <form
       className="w-full    mx-auto p-2"
       encType="multipart/form-data"

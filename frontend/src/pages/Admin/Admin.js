@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { FaRegComments } from "react-icons/fa";
 import { CiRead } from "react-icons/ci";
 import { FaRegNewspaper } from "react-icons/fa6";
 import axios from "axios";
-import { FcOvertime } from "react-icons/fc";
+import { NewsContext } from "../../context/NewsContext";
 
 function Admin() {
+  const { mode } = useContext(NewsContext);
   const [news, setNews] = useState(0);
   const [blog, setBlog] = useState(0);
   const [Allusers, setAllusers] = useState(0);
@@ -37,10 +38,10 @@ try{
   ];
 
   return (
-    <div className="p-6 mx-14 ">
-      <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 `}>
+    <div className={`p-6 ${mode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6`}>
         {stats.map((stat, index) => (
-          <div key={index} className="shadow-lg border border-white rounded-md p-4  w-60 flex flex-col items-center justify-center bg-white">
+          <div key={index} className="shadow-lg border border-white rounded-md p-4 w-52 flex flex-col items-center justify-center bg-white">
             <div className="mb-2">{stat.icon}</div>
             <p className="text-2xl text-orange-400 font-semibold">{stat.value}</p>
             <p className="text-lg text-green-600 font-medium">{stat.label}</p>

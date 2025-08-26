@@ -46,68 +46,64 @@ setCategories(categories.filter(category=>category._id!==id))
 
 
   return (
-    <div className="flex flex-col w-full justify-center items-center text-center p-4">
-      <form
-        className=" w-auto rounded-lg  bg-white  mx-auto p-2"
-      
-        onSubmit={handleSubmit}
+  <div className="flex flex-col w-full justify-center items-center text-center p-4 space-y-6">
+  {/* Form */}
+  <form
+    className="w-full max-w-md rounded-lg bg-white p-4 shadow-md"
+    onSubmit={handleSubmit}
+  >
+    <div className="mb-4">
+      <label
+        htmlFor="category-name"
+        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       >
+        Category Name
+      </label>
+      <input
+        type="text"
+        id="category-name"
+        name="name"
+        value={state.category.name || ""}
+        onChange={(e) => filterChange(e, "category")}
+        className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
 
-        
-        <div >
-          <label
-            htmlFor="small-input"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Category Name
-          </label>
-          <input
-            type="text"
-            id="small-input"
-            name="name"
-            value={state.category.name || ""}
-            onChange={(e) => filterChange(e, "category")}
-            className="block w-[500px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          />
-      
+    <button
+      type="submit"
+      className="w-full p-2 text-lg border bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition"
+    >
+      Add Category
+    </button>
+  </form>
 
-      
-          <button
-            type="submit"
-      
-            className=" mt-6 w-[500px] p-2 text-xl border bg-blue-600 text-white rounded-lg hover:bg-blue-300"
-          >
-            Add Category
-          </button>
-
-
-        </div>
-        
-      </form>
-
-      
-      <div className="flex shadow-lg bg-white p-2 m-4 w-[800px]">
-  <table className="table-auto w-full text-black ">
-    <thead>
-      <tr className='bg-slate-500 '>
-        <th></th>
-        <th>Category ID</th>
-        <th>Category Name</th>
-      </tr>
-    </thead>
-    <tbody >
-      {categories.map((category) => (
-        <tr className='border-b-2 border-black font-serif' key={category._id}>
-          <td><button onClick={()=>deleteCategory(category._id)}><MdDelete className='text-red-500' size={20}/></button></td>
-          <td>{category._id}</td>
-          <td>{category.name}</td>
+  {/* Table */}
+  <div className="w-full overflow-x-auto">
+    <table className="table-auto w-full border-collapse border border-gray-300 text-sm md:text-base">
+      <thead className="bg-blue-600 text-white">
+        <tr>
+          <th className="p-2"></th>
+          <th className="p-2 hidden sm:table-cell">Category ID</th>
+          <th className="p-2">Category Name</th>
         </tr>
-      ))}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {categories.map((category) => (
+          <tr key={category._id} className="border-b border-gray-300">
+            <td className="p-2">
+              <button onClick={() => deleteCategory(category._id)}>
+                <MdDelete className="text-red-500" size={20} />
+              </button>
+            </td>
+            <td className="p-2 hidden sm:table-cell">{category._id}</td>
+            <td className="p-2">{category.name}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 </div>
 
-    </div>
   )
 }
 

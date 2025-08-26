@@ -15,7 +15,7 @@ function Navbar({ open, setOpen }) {
     <div
       className={`fixed top-0 left-0 h-screen border-r shadow-md border-gray-300 z-40 
         bg-white transition-all duration-300
-        ${open ? 'w-64' : 'w-16'}
+        ${open ? 'w-64' : 'w-16'} 
       `}
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}

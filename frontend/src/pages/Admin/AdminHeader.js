@@ -36,10 +36,11 @@ function AdminHeader({ open }) {
 
   return (
    <div
-  className={`fixed top-0 left-0 right-0 lg:h-20 h-14 flex justify-between items-center px-4 md:px-8 border-b border-gray-200  bg-white dark:bg-gray-800`}
+  className={`fixed top-0 left-0 right-0 lg:h-20 h-14 flex justify-between items-center 
+  px-4 md:px-8 border-b border-gray-200  bg-white dark:bg-gray-800 ${mode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
 >
 <div className="mx-20"> 
-  <h1 className="text-lg md:text-2xl font-bold text-gray-800 dark:text-white">Admin Panel</h1>
+  <h1 className="text-lg md:text-2xl font-bold  ">Admin Panel</h1>
 </div>
 
   <div className="flex items-center space-x-4">
@@ -57,12 +58,29 @@ function AdminHeader({ open }) {
         )}
       </button>
       {togglemessage && (
-        <ul className="absolute top-10 right-0 w-80 bg-white dark:bg-gray-700 shadow-lg rounded-md p-2 text-gray-800 dark:text-white">
+        <ul className="absolute top-10 right-0 w-80 bg-white  shadow-lg rounded-md p-2 text-gray-800 ">
           {messages.length > 0 ? (
             messages.map((mes) => (
-              <li key={mes.id} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-600 rounded">
-                {mes.message}
-              </li>
+            <li
+                    key={mes.id}
+                    className="flex p-2 border-b border-white bg-slate-100 text-sm hover:bg-gray-200 cursor-pointer"
+                  >
+                    <img
+                      src={mes.image || "image/google.jpg"}
+                      className="m-2 w-10 h-10 rounded-full cursor-pointer"
+                      alt="google"
+                    />
+                    
+                    <div className="flex flex-col text-left">
+                      {mes.message}
+                      <div className="flex ">
+                        <p className="text-sm text-gray-500 flex ">
+                          <IoTimeOutline className="text-blue-500 " size={20} />
+                          {formatTimeAgo(mes.createdAt)}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
             ))
           ) : (
             <li className="p-2 text-gray-500">No messages</li>
