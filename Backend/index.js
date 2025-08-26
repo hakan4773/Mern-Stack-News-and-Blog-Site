@@ -19,7 +19,7 @@ const categoryRoutes=require("./Routes/categoryRoutes")
 const authRoutes=require("./Routes/authRoutes")
 const contactRoutes=require("./Routes/contactRoutes")
 const adminRoutes=require("./Routes/adminRoutes")
-// const commentRoutes=require("./Routes/commentRoutes")
+
 const app=express();
 dotenv.config();
 mongoose.connect(process.env.MONGO_URI)
@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 //Middlewares
 app.use(cors({
-  origin: [ 'http://localhost:3000','https://news-mern-stack-news-and-blog-site.netlify.app'],
+  origin: [ 'http://localhost:3000','https://news-mern-stack-news-and-blog-site.netlify.app/'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ["Content-Type", "Authorization","Cookie"]
@@ -38,7 +38,7 @@ app.use(cors({
 
 
 
-  app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 
@@ -56,6 +56,7 @@ app.use(session({
   cookie: {
     secure: false , 
     maxAge: 1000 * 60 * 60 * 24 * 365, 
+    sameSite: "none",
   },
   store:MongoStore.create({ mongoUrl: process.env.MONGO_URI})
 }));
@@ -67,7 +68,7 @@ app.use("/Blog",blogRoutes)
 app.use("/categories",categoryRoutes)
 app.use("/users",authRoutes)
 app.use("/contact",contactRoutes)
-// app.use("/comment",commentRoutes)
+
 
 app.use("/Admin",adminRoutes)
 
