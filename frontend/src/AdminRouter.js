@@ -19,6 +19,7 @@ import EditBlogPage from './pages/Admin/EditBlogPage';
 function AdminRouter() {
   const {mode}=useContext(NewsContext)
   const [isAdmin, setIsAdmin] = useState(null);
+    const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,22 +30,19 @@ function AdminRouter() {
       })
       .catch(error => {
         console.error("Erişim engellendi: ", error.response?.data?.message || error.message);
-        setIsAdmin(false);  // Set to false on error
-        navigate("/");  // Redirect to home
+        setIsAdmin(false); 
+        navigate("/");  
       });
   }, [navigate]);
 
   return isAdmin ? (
     <div className={`flex h-full ${mode ? 'bg-zinc-700 text-white' : 'bg-white text-black'}`}>      
-      <Navbar />
-
-      
+      <Navbar open={open} setOpen={setOpen} />
       <div className="flex-1 flex flex-col ">
-      <AdminHeader />
-<div className='h-screen ml-52 '>
- 
+      <AdminHeader  open={open} setOpen={setOpen} />
+        <main className='h-screen flex justify-center mx-20 mt-20'>
           <Routes>
-            <Route path="/" element={<Admin />} />
+            <Route path="/" element={<Admin open={open} />} />
             <Route path="AddNews" element={<AddNews />} />
             <Route path="AuthorNews" element={<AuthorNews />} />
             <Route path="AddCategory" element={<AddCategory />} />
@@ -55,7 +53,7 @@ function AdminRouter() {
             <Route path="/News/EditPage/:id" element={<EditPage />} />
             <Route path="/Blog/EditBlogPage/:id" element={<EditBlogPage />} />
           </Routes>
-        </div>
+        </main>
       </div></div>
   ) : (
     <Link to="/" /> 

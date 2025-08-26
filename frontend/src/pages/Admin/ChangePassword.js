@@ -19,7 +19,7 @@ function ChangePassword() {
               headers: {
                 "Content-Type": "application/json",
               },
-              withCredentials: true, // Oturum bilgilerini gönder
+              withCredentials: true, 
             }
           
           );  console.log(response.data);
@@ -33,61 +33,65 @@ function ChangePassword() {
   const {name,value}=e.target
   setUser(prevUser=>({...prevUser,[name]:value}))
     }
-    return (
-        <div className='flex flex-col w-full  items-center text-center p-4  h-full  '>
-        <div className={`border-white  rounded-md shadow-lg w-[600px] h-auto flex ${mode ? 'bg-slate-400 text-white' : 'bg-slate-50 text-black'}`}>
-        <div className='relative w-52'>
-        <img src={user.image} className="absolute inset-0  w-40 h-40 rounded-full p-1 shadow-md" alt="User Profile" />
+return (
+  <div className={`flex flex-col items-center p-4 lg:w-full w-[400px] h-full `}>
+    <div className={`rounded-md shadow-lg flex flex-col lg:flex-row w-full max-w-4xl bg-slate-50 dark:bg-slate-800 text-black dark:text-white p-4 ${mode ? 'bg-zinc-700 text-white' : 'bg-white text-black'}`}>
+      
+      <div className="relative w-full lg:w-1/3 flex justify-center mb-4 lg:mb-0">
+        <img
+          src={user.image}
+          className="w-40 h-40 rounded-full p-1 shadow-md object-cover"
+          alt="User Profile"
+        />
         <input
-        className="absolute  inset-14   left-8 opacity-40 h-10 w-24 text-sm text-black border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-        type="file"
-        name="image"
-     
-      />
-        </div>
-   
-        <form onSubmit={handleSubmit}>
-            <div className="flex flex-col w-[280px] p-4 space-y-4 text-black ">
-             {/* <h1 className=" text-xl">My Profile</h1> */}
-             <div className='flex justify-between '>
-                <Link to={"/Admin/Profile"} className='text-slate-600 text-xl hover:text-blue-500 focus:text-blue-500'>Profile</Link>
-                <Link to={"/Admin/ChangePassword"} className='text-slate-600 text-xl hover:text-blue-500 focus:text-blue-500' > Change Password</Link>
-  
-              </div>
-              
-              <hr className="w-80" />
-  
-              <input
-                className="w-80 p-2 shadow-md bg-slate-50"
-                onChange={handleChange}
-                name="oldPassword"
-                type="password"
-                placeholder="Old Password"
-              />
-              <input
-                className="w-80 p-2 shadow-md bg-slate-50"
-                onChange={handleChange}
-                name="newPassword"
-                type="password"
-                placeholder="New Password"
-              />
-            
-              <button className="w-80 border rounded-xl bg-green-500 text-xl hover:bg-red-600">
-                Change Password
-              </button>
-            </div>
-          </form>
-  
-  
-  
-  
-  
-  
-        </div>
-  
+          type="file"
+          name="image"
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 opacity-70 w-32 h-10 text-sm text-black border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 dark:text-gray-400 focus:outline-none"
+        />
       </div>
 
-  )
-}
+      <form onSubmit={handleSubmit} className="flex-1">
+        <div className="flex flex-col w-full lg:w-2/3 p-4 space-y-4">
+          
+          <div className="flex flex-row justify-between space-y-0">
+            <Link
+              to="/Admin/Profile"
+              className="text-slate-600 hover:text-blue-500"
+            >
+              Profile
+            </Link>
+            <Link
+              to="/Admin/ChangePassword"
+              className="text-slate-600 hover:text-blue-500"
+            >
+              Change Password
+            </Link>
+          </div>
 
+          <hr className="w-full border-gray-300" />
+
+          <input
+            className="w-full p-2 shadow-md bg-slate-50 dark:bg-slate-700 rounded"
+            onChange={handleChange}
+            name="oldPassword"
+            type="password"
+            placeholder="Old Password"
+          />
+          <input
+            className="w-full p-2 shadow-md bg-slate-50 dark:bg-slate-700 rounded"
+            onChange={handleChange}
+            name="newPassword"
+            type="password"
+            placeholder="New Password"
+          />
+          
+          <button className="w-full py-2 rounded-xl bg-green-500 text-white text-lg hover:bg-red-600">
+            Change Password
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+);
+}
 export default ChangePassword

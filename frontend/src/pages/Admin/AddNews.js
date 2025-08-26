@@ -52,7 +52,7 @@ setİmage(e.target.files[0])
     }
   };
   return (
-    <div className="flex flex-col w-full   justify-center items-center text-center p-4">
+    <div className="flex flex-col w-full justify-center items-center text-center p-4">
       <form
         className=" w-full rounded-lg    mx-auto p-2"
         encType="multipart/form-data"

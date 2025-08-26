@@ -1,75 +1,55 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { IoHomeOutline } from "react-icons/io5";
 import { CiUser } from "react-icons/ci";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaRegNewspaper } from "react-icons/fa6";
 import { MdCategory } from "react-icons/md";
-import { FaRegComment } from "react-icons/fa";
 import { NewsContext } from '../../context/NewsContext';
-function Navbar() {
-  const {user}=useContext(NewsContext);
+
+function Navbar({ open, setOpen }) {
+
+  const { user } = useContext(NewsContext);
+
   return (
-    <div className='fixed top-0 p-4 space-y-8 h-screen  border-r  shadow-md border-r-gray-300   z-40'  >
-      <div>
-      <Link to={"/"} className='flex justify-center text-center text-4xl font-bold text-gray-400  w-full hover:text-blue-600 focus:text-blue-600'>
-  NEWS
-    </Link>
+    <div
+      className={`fixed top-0 left-0 h-screen border-r shadow-md border-gray-300 z-40 
+        bg-white transition-all duration-300
+        ${open ? 'w-64' : 'w-16'}
+      `}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <div className='flex items-center justify-center p-4'>
+        {open && <h1 className='text-2xl font-bold text-gray-400'>Admin Panel</h1>}
       </div>
-    <div className='w-full'>
-    <Link to={"/Admin"} className='flex text-xl  text-gray-400  w-full hover:text-blue-600 focus:text-blue-600'>
-    <IoHomeOutline  size={20} className=' mx-4' />
-    Dashboard</Link>
+
+      <div className='flex flex-col mt-4 space-y-2 justify-center '>
+        <NavItem to="/Admin" icon={<IoHomeOutline size={24} />} label="Dashboard" open={open} />
+        <NavItem to="/Admin/Profile" icon={<AiOutlineDashboard size={24} />} label="Profile" open={open} />
+
+        {user?.role === "admin" && (
+          <NavItem to="/Admin/Users" icon={<CiUser size={24} />} label="Users" open={open} />
+        )}
+
+        <NavItem to="/Admin/AddNews" icon={<FaRegNewspaper size={24} />} label="Add News" open={open} />
+        <NavItem to="/Admin/AddBlog" icon={<FaRegNewspaper size={24} />} label="Add Blog" open={open} />
+        <NavItem to="/Admin/AuthorNews" icon={<FaRegNewspaper size={24} />} label="News" open={open} />
+
+        {user?.role === "admin" && (
+          <NavItem to="/Admin/AddCategory" icon={<MdCategory size={24} />} label="Add Category" open={open} />
+        )}
+      </div>
     </div>
-    <div className='w-full'>
-    <Link  to={"/Admin/Profile"} className='flex  text-xl  text-gray-400 w-full hover:text-blue-600 focus:text-blue-600'>
-    < AiOutlineDashboard size={20} className='mx-4' />
-    Profile</Link>
-    </div>
-
-
-    {(user?.role === "admin") && (
-    <div className='w-full'>
-        <Link to={"/Admin/Users"} className='flex text-gray-400 text-xl w-full hover:text-blue-600 focus:text-blue-600'>
-            <CiUser size={20} className='mx-4'/>
-            Users
-        </Link>
-    </div>
-)}
-    <div className='w-full'>
-    <Link className='flex  text-gray-400  text-xl   w-full hover:text-blue-600 focus:text-blue-600'>
-    <FaRegComment size={20} className='mx-4'/>
-
-    Comments</Link>
-    </div>
-
-    <div className='w-full'>
-    <Link to={"/Admin/AddNews"} className='flex text-xl  text-gray-400  hover:text-blue-600 focus:text-blue-600 w-full'>
-    <FaRegNewspaper  size={20} className='mx-4' />
- Add News</Link>
-    </div> 
-    <div className='w-full'>
-    <Link to={"/Admin/AddBlog"} className='flex text-xl   text-gray-400  hover:text-blue-600 focus:text-blue-600 w-full'>
-    <FaRegNewspaper  size={20} className='mx-4' />
-    Add Blog</Link>
-    </div> 
-
-    <div className='w-full'>
-    <Link to={"/Admin/AuthorNews"} className='flex text-xl   text-gray-400   w-full hover:text-blue-600 focus:text-blue-600'>
-    <FaRegNewspaper  size={20} className='mx-4' />
-    News</Link>
-    </div>  
-
-
-    {(user?.role === "admin") && (
-    <div className=' w-full '>
-    <Link to={"/Admin/AddCategory"} className='flex text-xl   text-gray-400  w-full hover:text-blue-600 focus:text-blue-600'>
-    <MdCategory  size={20} className='mx-4' />
-    Add Category</Link>
-    </div> 
- )}
-       </div>
-  )
+  );
 }
 
-export default Navbar
+// NavItem Component
+const NavItem = ({ to, icon, label, open }) => (
+  <Link to={to} className='flex items-center p-3 text-gray-400 hover:text-blue-600 transition-colors'>
+    {icon}
+    {open && <span className='ml-4 text-lg'>{label}</span>}
+  </Link>
+);
+
+export default Navbar;

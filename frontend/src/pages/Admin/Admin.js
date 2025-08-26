@@ -18,7 +18,7 @@ try{
   const responseUsers =await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/users`,{ withCredentials: true })
     setNews(responseNews.data.news);
     setBlog(responseBlog.data.blog);
-    setAllusers(responseUsers.data.Allusers);
+    setAllusers(responseUsers.data.allUsers);
 }
 
     catch(error){
@@ -28,81 +28,26 @@ try{
    fetchCount();
   }, []);
 
+  const stats = [
+    { icon: <FaRegUser size={40} className="text-orange-400" />, value: Allusers, label: "Users" },
+    { icon: <FaRegComments size={40} className="text-orange-400" />, value: 0, label: "Comments" },
+    { icon: <CiRead size={40} className="text-orange-400" />, value: 1000, label: "Reads" },
+    { icon: <FaRegNewspaper size={40} className="text-orange-400" />, value: news.length, label: "News" },
+    { icon: <FaRegNewspaper size={40} className="text-orange-400" />, value: blog.length, label: "Blog" },
+  ];
+
   return (
-    <div className="flex flex-row ">
-
-<div className="py-2 px-2"> 
-<div className="relative"> 
-<FcOvertime className="absolute top-1 left-1" size={27}/>
-  <select className="border-2 p-1 pl-10  rounded-md text-black border-slate-500 border-opacity-40 w-40">
-
-  <option>
-   1 hour
-  </option>
-  <option>
-  7 days
-  </option>
-  <option>
-   1 month
-  </option>
-  <option>
-  All Time
-  </option>
-  </select>
-
-</div>
-
-      <div className="flex space-x-8 py-12">
-      <div className="shadow-lg w-60 border-white  p-4 border rounded-md">
-        <div className="flex justify-center items-center text-center">
-          <FaRegUser size={40} className="text-orange-400" />
-        </div>
-        <div className="flex flex-col justify-center items-center text-center p-2">
-          <p className="text-2xl text-orange-400 font-semibold">{Allusers}</p>
-          <p className="text-2xl text-green-600">Welcome</p>
-        </div>
-      </div>
-      <div className="shadow-lg w-40 border-white  p-4 border rounded-md">
-        <div className="flex justify-center items-center text-center">
-          <FaRegComments size={40} className="text-orange-400" />
-        </div>
-        <div className="flex flex-col justify-center items-center text-center p-2">
-          <p className="text-2xl text-orange-400 font-semibold">120</p>
-          <p className="text-2xl text-green-600">Comments</p>
-        </div>
-      </div>
-      <div className="shadow-lg w-40 border-white  p-4 border rounded-md">
-        <div className="flex justify-center items-center text-center">
-          <CiRead size={40} className="text-orange-400" />
-        </div>
-        <div className="flex flex-col justify-center items-center text-center p-2">
-          <p className="text-2xl text-orange-400 font-semibold">1000</p>
-          <p className="text-2xl text-green-600">Reads</p>
-        </div>
-      </div>
-      <div className="shadow-lg w-40 border-white  p-4 border rounded-md">
-        <div className="flex justify-center items-center text-center">
-          <FaRegNewspaper size={40} className="text-orange-400" />
-        </div>
-        <div className="flex flex-col justify-center items-center text-center p-2">
-          <p className="text-2xl text-orange-400 font-semibold">{news.length}</p>
-          <p className="text-2xl text-green-600">News</p>
-        </div>
-      </div>
-      <div className="shadow-lg w-40 border-white  p-4 border rounded-md">
-        <div className="flex justify-center items-center text-center">
-          <FaRegNewspaper size={40} className="text-orange-400" />
-        </div>
-        <div className="flex flex-col justify-center items-center text-center p-2">
-          {blog.length > 0 ? (
-          <p className="text-2xl text-orange-400 font-semibold">{blog.length}</p>
-        ):(<p>0</p>)}
-          <p className="text-2xl text-green-600">Blog</p>
-        </div>
+    <div className="p-6 mx-14 ">
+      <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 `}>
+        {stats.map((stat, index) => (
+          <div key={index} className="shadow-lg border border-white rounded-md p-4  w-60 flex flex-col items-center justify-center bg-white">
+            <div className="mb-2">{stat.icon}</div>
+            <p className="text-2xl text-orange-400 font-semibold">{stat.value}</p>
+            <p className="text-lg text-green-600 font-medium">{stat.label}</p>
+          </div>
+        ))}
       </div>
     </div>
-    </div></div>
-
   );
 }
 
