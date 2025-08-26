@@ -73,7 +73,6 @@ function Login() {
       );
       setUser(response.data.user);
       toggleLoginModal();
-     // window.location.reload();
 
 
     } catch (error) {
@@ -101,17 +100,17 @@ function Login() {
             alt="User Profile"
           />
           <button className="ml-2  font-semibold text-xl text-white"></button>
-          {toggleDown && (
+          {toggleDown &&  (
             <ul className="absolute  top-14  right-6 z-50 bg-white shadow-lg rounded-md py-2 text-black w-36 ">
-              <li
-                className="flex p-2 hover:bg-gray-100 cursor-pointer"
-                onClick={isAdmin}
-              >
-                <IoPerson className="m-1" /> Profilim
-              </li>
-              <li className="flex p-2 hover:bg-gray-100 cursor-pointer">
-                <IoSettings className="m-1" /> Settings
-              </li>
+              {isAdmin && (
+                <li
+                  className="flex p-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={isAdmin}
+                >
+                  <IoPerson className="m-1" /> Profilim
+                </li>
+              
+              )}
               <li
                 className="flex p-2 hover:bg-gray-100 cursor-pointer"
                 onClick={handleLogout}
@@ -219,8 +218,8 @@ function Login() {
                       type="button"
                       className="text-green-500 font-bold"
                       onClick={() => {
-                        toggleLoginModal(); // Login modalını kapat
-                        toggleRegisterModal(); // Register modalını aç
+                        toggleLoginModal(); 
+                        toggleRegisterModal(); 
                       }}
                     >
                       Create an Account

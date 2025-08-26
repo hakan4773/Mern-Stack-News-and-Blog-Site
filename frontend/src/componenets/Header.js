@@ -19,7 +19,7 @@ function Header() {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/categories`);
         setCategories(response.data.categories);
       } catch (error) {
-        console.log("Kategori verisi alınamadı:", error);
+        console.error("Kategori verisi alınamadı:", error);
       }
     };
 
@@ -30,20 +30,15 @@ function Header() {
     setToggleNotification(prev => !prev);
   };
 
-
   return (
-    <div className="w-full  min-w-[400px] z-50
+    <div className="w-full  min-w-[400px] z-100 
      bg-red-600  flex flex-wrap justify-between items-center  ">
 
-<div className= "hidden md:flex justify-center text-center items-center container">
-
-
+      <div className= "hidden md:flex justify-center text-center items-center container">
        <div className="  px-8 lg:p-4  sm:flex sm:flex-wrap   lg:flex-row  text-center items-center mr-auto ">
         <div id="home"><Link to="/" className="block text-white font-bold lg:text-xl sm:text-sm lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1  hover:bg-red-300">AnaSayfa</Link></div>
         <div id="news"><Link to="/News" className="block text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Haberler</Link></div>
-        <div id="recommend"><Link to="/" className="block text-white font-bold lg:text-xl sm:text-sm  lg:hover:bg-red-400 lg:rounded-md rounded-lg lg:p-2 p-1 hover:bg-red-300">Önerilenler</Link></div>
 
-{/* Select */}
         <div className="lg:p-4  font-bold lg:text-xl sm:text-sm ">
           {categories.length === 0 ? (
             <p>Yükleniyor...</p>
@@ -55,21 +50,15 @@ function Header() {
               <option className="bg-white text-black ">Kategoriler</option>
               {categories.map(category => (
                 <option key={category._id} value={category._id} className="bg-white text-black">
-                  {category.name}
+                  {category?.name}
                 </option>
               ))}
             </select>
           )}
-
-
         </div>
-
-  
-  
     </div>
-      {/* İnput */}    
       
- <div className="lg:px-5 px-10  relative">
+     <div className="lg:px-5 px-10  relative">
         <input
           type="text"
           name="filter"
@@ -78,11 +67,7 @@ function Header() {
           className="border border-gray-300 rounded-md p-2 pl-10 text-gray-800 w-[300px] md:w-44  lg:w-60"
         />
         <CiSearch className="absolute lg:top-3 lg:left-8   top-3 text-gray-600" size={20} />
-      </div>
-       
-
-
-{/* bildirim */}
+      </div>  
       <div className="relative lg:p-4   flex items-center ">
         <button className="relative lg:hover:bg-red-400 lg:rounded-md   hover:bg-red-300" onClick={toggleNotificationHandler}>
           <IoMdNotificationsOutline className="m-1 text-white" size={30} />
@@ -97,16 +82,12 @@ function Header() {
           </ul>
         )}
       </div>
-
-
-
-    {/* Login */}
         <div className="flex justify-end items-end " ><Login /></div>
       </div>
 
 
 
-
+{/* menu */}
       <button
             className="md:hidden text-white"
             onClick={() => setIsOpen(!isOpen)}
@@ -136,10 +117,8 @@ function Header() {
           </button>
 
           {isOpen && (
-  <div className="md:hidden    flex flex-col px-4 w-full">
-    {/* Üst Kısım - Bildirim ve Login */}
+  <div className="md:hidden flex flex-col px-4 w-full">
     <div className="flex justify-end items-end w-full px-4 gap-3">
-      {/* Bildirim */}
       <div className="relative">
         <button className="p-2 hover:bg-red-300 rounded-md transition-colors" onClick={toggleNotificationHandler}>
           <IoMdNotificationsOutline className="text-white" size={25} />
@@ -157,12 +136,9 @@ function Header() {
       <div><Login /></div>
     </div>
 
-    {/* Navigasyon Linkleri */}
     <div className="flex flex-col space-y-3 w-full">
       <Link to="/" className="text-white hover:text-red-500 transition py-2 text-center">AnaSayfa</Link>
       <Link to="/News" className="text-white hover:text-red-500 transition py-2 text-center">Haberler</Link>
-      <Link to="/" className="text-white hover:text-red-500 transition py-2 text-center">Önerilenler</Link>
-      {/* Kategoriler Select */}
     <div className="w-full mx-2">
       {categories.length === 0 ? (
         <p className="text-center text-white">Yükleniyor...</p>
@@ -174,7 +150,7 @@ function Header() {
           <option className="bg-white text-black ">Kategoriler</option>
           {categories.map(category => (
             <option key={category._id} value={category._id} className="bg-white text-black">
-              {category.name}
+              {category?.name}
             </option>
           ))}
         </select>
@@ -182,10 +158,6 @@ function Header() {
     </div>
     </div>
 
-
-  
-
-    {/* Arama Kutusu */}
     <div className="relative w-full p-3 ">
       <input
         type="text"
@@ -199,17 +171,8 @@ function Header() {
   </div>
 )}
 
-
-
-
-
-
-
       </div>
-
-
-
- 
+  
   );
 }
 
