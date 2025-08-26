@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 //Middlewares
 app.use(cors({
-  origin: [ 'http://localhost:3000','https://news-mern-stack-news-and-blog-site.netlify.app/'],
+  origin: [ 'http://localhost:3000','https://news-mern-stack-news-and-blog-site.netlify.app'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ["Content-Type", "Authorization","Cookie"]
@@ -52,9 +52,9 @@ app.use(methodOverride("_method",{methods:["GET","POST"]}))
 app.use(session({
   secret: 'my_cat', 
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
-    secure: false , 
+   secure: process.env.NODE_ENV === "production", 
     maxAge: 1000 * 60 * 60 * 24 * 365, 
     sameSite: "none",
   },
