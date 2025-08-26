@@ -27,13 +27,11 @@ fetchNews();
                 news.slice(0, 10).map((item, index) => (
                     <Link to={"/news"} key={index}>
                         <div className="relative flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-                            {/* Resim için sabit boyut ve oran koruma */}
                             <img
                                 className='w-full h-full object-cover'
                                 src={item.image}
-                                alt={item.category.name}
+                                alt={item.category?.name}
                             />
-                            {/* Başlık için stil ayarları */}
                             <div className='absolute inset-0 flex text-center justify-center items-center bg-black bg-opacity-50'>
                                 <h1 className='text-white text-lg sm:text-xl lg:text-2xl px-4'>
                                     {item.title}

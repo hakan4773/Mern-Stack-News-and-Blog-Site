@@ -32,7 +32,7 @@ function Footer() {
 
   return (
     <footer className="w-screen  text-white bg-red-600  p-2 min-w-[400px]">
-      <div className="flex  flex-wrap  lg:flex-row justify-around items-start">
+      <div className="flex  flex-wrap md:space-x-5  lg:flex-row lg:justify-around justify-center items-start">
         <form onSubmit={handleSubmit} className="w-full flex justify-center text-center items-center lg:w-1/4 ">
           <div className="flex flex-col lg:w-[280px] w-full lg:p-4 p-4 space-y-4 text-black">
             <h1 className="text-white text-xl">Bize Ulaşın</h1>
@@ -65,8 +65,8 @@ function Footer() {
         </form>
 
         <div className="flex flex-col  lg:ml-8 my-4  space-y-4 ">
-          <h1 className="text-white text-xl">Bizi Takip Edin</h1>
-          <hr className="w-24" />
+          <h1 className="text-white lg:text-xl lg:w-full md:w-20 w-18">Bizi Takip Edin</h1>
+          <hr className="lg:w-24 md:w-20 w-12" />
           <Link
             to="https://www.instagram.com/accounts/login/"
             className="hover:text-white"
@@ -88,8 +88,8 @@ function Footer() {
         </div>
 
         <div className="flex flex-col  p-4 lg:p-4    space-y-4 items-start">
-          <h1 className="text-white text-xl">Bağlantılar</h1>
-          <hr className="w-20" />
+          <h1 className="text-white lg:text-xl lg:w-full md:w-20 w-12">Bağlantılar</h1>
+          <hr className="lg:w-20 md:w-20 w-12" />
           <ul className="font-medium space-y-4">
             <li>
               <Link className="hover:text-gray-400" to="/">
@@ -119,20 +119,20 @@ function Footer() {
           </ul>
         </div>
 
-        <div className="flex flex-col  p-4 space-y-4  items-start ">
-          <h1 className="text-white text-xl">İletişim bilgileri</h1>
-          <hr className="w-40" />
+        <div className="flex flex-col  p-4 space-y-4   items-start ">
+          <h1 className="text-white lg:text-xl lg:w-full w-12">İletişim bilgileri</h1>
+          <hr className="lg:w-20 md:w-20 w-12" />
           <p className="flex ">
-            <GrLanguage className="m-2" />{" "}
-            <span className="text-xl">Türkiye</span>{" "}
+            <GrLanguage className="m-2" />
+            <span className="lg:text-xl">Türkiye</span>
           </p>
           <p className="flex">
             <FaMapMarkerAlt className="m-2" />
-            <span>İstanbul / Avrupa</span>
+            <span>İstanbul</span>
           </p>
           <p className="flex">
             <FaPhoneAlt className="m-2" />
-            <span>(+90) 556 024 4561</span>
+            <span>(+90) xxx xxx</span>
           </p>
 
         </div>
