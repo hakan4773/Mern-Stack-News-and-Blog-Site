@@ -149,13 +149,7 @@ function Header() {
           <ul className="absolute top-12 right-0 bg-white shadow-lg rounded-md py-2 text-black w-64 z-[9999]">
             <p className="flex justify-center items-center text-center font-bold border-b p-2">Notification</p>
             <li className="p-3 border-b hover:bg-gray-100 cursor-pointer text-sm">
-              <span className="mr-2 font-bold">1)</span>X kullanıcısından bir mesajınız var
-            </li>
-            <li className="p-3 border-b hover:bg-gray-100 cursor-pointer text-sm">
-              <span className="mr-2 font-bold">2)</span>A:selam
-            </li>
-            <li className="p-3 hover:bg-gray-100 cursor-pointer text-sm">
-              <span className="mr-2 font-bold">3)</span>A:Nasılsın
+              <IoMdNotificationsOutline className="mr-2" /> X kullanıcısından bir mesajınız var
             </li>
           </ul>
         )}
