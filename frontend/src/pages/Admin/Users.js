@@ -23,7 +23,7 @@ function Users() {
         }
       };
       fetchUser();
-    }, []);
+    }, [user._id]);
 
 const deleteUsers=async(id)=>
   {

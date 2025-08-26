@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import { IoPersonOutline } from "react-icons/io5";
 import { NewsContext } from "../context/NewsContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IoPerson } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
-import { IoSettings } from "react-icons/io5";
 function Login() {
   const navigate = useNavigate();
   const { filterChange, state, user, setUser, handleLogout } =
