@@ -38,6 +38,15 @@ function SingleNews() {
   }, [id]);
 
   const handleSubmit = async () => {
+    if (newComment.trim().split(" ").length < 10) {
+      alert("Yorumunuz minimum 10 kelimeden oluşmalıdır.");
+      return;
+    }
+    //giriş yapmamışsa
+    if (!user) {
+      alert("Yorum yapabilmek için giriş yapmalısınız.");
+      return;
+    }
     try {
       const commentdata = {
         name: user.name,
