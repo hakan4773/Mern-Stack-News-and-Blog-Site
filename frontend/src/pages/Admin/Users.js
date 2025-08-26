@@ -86,7 +86,7 @@ const deleteUsers=async(id)=>
           <td className='border-r  border-gray-300 '><img src={user.image || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt='users' className='p-2 w-20 h-20'></img></td>
           <td className='border-r  border-gray-300 '>       
               <select
-                  className="m-2"
+                  className="m-2 p-2 border rounded-lg border-gray-200"
                   value={user.role}
                   onChange={(e) => assignRole(user._id, e.target.value)}
                 >
