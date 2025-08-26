@@ -91,14 +91,8 @@ function Header() {
         {toggleNotification && (
           <ul className="absolute top-14 right-4 bg-white shadow-lg rounded-md py-2 text-black w-40 z-[9999]">
             <p className="flex justify-center items-center text-center font-bold border-b-4">Notification</p>
-            <li className="p-2 border-b hover:bg-gray-100 cursor-pointer">
-              <span className="mx-1 font-bold">1)</span>X kullanıcısından bir mesajınız var
-            </li>
-            <li className="p-2 border-b hover:bg-gray-100 cursor-pointer">
-              <span className="mx-1 font-bold">2)</span>A:selam
-            </li>
-            <li className="p-2 hover:bg-gray-100 cursor-pointer">
-              <span className="mx-1 font-bold">3)</span>A:Nasılsın
+            <li className="p-2 flex items-center border-b hover:bg-gray-100 cursor-pointer">
+              <IoMdNotificationsOutline className="mr-2" /> X kullanıcısından bir mesajınız var
             </li>
           </ul>
         )}
