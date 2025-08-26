@@ -6,38 +6,36 @@ import { MdDelete } from "react-icons/md";
 function Users() {
     const {mode}=useContext(NewsContext);
     const [userİnformation, setUserİnformation] = useState([]);
-
+ console.log(userİnformation);
     useEffect(() => {
-     const fetchUser=async()=>{
-  try
-  {
-      const responseUsers =await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/users`,{ withCredentials: true })
-      setUserİnformation(responseUsers.data.userİnformation);
-      console.log(responseUsers.data.userİnformation)
-  }
-      catch(error){
-        console.error("Hata Oluştu: ", error.message);
-      }
-     }
-     fetchUser();
+      const fetchUser = async () => {
+        try {
+          const responseUsers = await axios.get(
+            `${process.env.REACT_APP_BACKEND_URL}/users/users`,
+            { withCredentials: true }
+          );
+          setUserİnformation(responseUsers.data.userİnformation);
+        } catch (error) {
+          console.error("Hata Oluştu: ", error.message);
+        }
+      };
+      fetchUser();
     }, []);
 
 const deleteUsers=async(id)=>
   {
-     const confirmUsers=window.confirm("Are You Sure")
-
-if(confirmUsers){
-  try {
-  await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/users/users/${id}`)
-  setUserİnformation(userİnformation.filter(user=>user._id!==id))
-} catch (error) {
-  console.log("Kategori silinemedi",error.message)
-}
-}
-
+    const confirmUsers = window.confirm("Are You Sure");
+    if (confirmUsers) {
+      try {
+        await axios.delete(
+          `${process.env.REACT_APP_BACKEND_URL}/users/users/${id}`
+        );
+        setUserİnformation(userİnformation.filter((user) => user._id !== id));
+      } catch (error) {
+        console.error("Kategori silinemedi", error.message);
+      }
+    }
   }
-
-
 
   return (
     <div className='flex flex-col w-full  items-center text-center p-4  h-full '>
@@ -54,11 +52,10 @@ if(confirmUsers){
         <th>User gender</th>
         <th>User Number</th>
         <th>User Address</th>
-
       </tr>
     </thead>
     <tbody >
-      {userİnformation.map((user) => (
+      {userİnformation?.map((user) => (
         <tr className='border-b border-black ' key={user._id}>
           <td><button 
           onClick={()=>deleteUsers(user._id)}
@@ -76,19 +73,11 @@ if(confirmUsers){
           <td className='border-r  border-black '>{user.gender}</td>
           <td className='border-r border-black '>{user.number || "belirtilmemiş"}</td>
           <td >{user.Address || "belirtilmemiş"}</td>
-
-
         </tr>
       ))}
     </tbody>
   </table>
 </div>
-
-
-
-
-
-
   </div>
   )
 }
