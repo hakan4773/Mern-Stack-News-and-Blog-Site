@@ -129,7 +129,7 @@ const getSingleNews=(id)=>{
           className="bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full"
         >
           <Link
-            href={`/Blog/${item._id}`}
+            to={`/Blog/${item._id}`}
             aria-label={`Read blog post: ${item.title}`}
           >
             <img
