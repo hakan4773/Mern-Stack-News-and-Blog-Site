@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { CiDark } from "react-icons/ci";
-import { CiSearch } from "react-icons/ci";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import { NewsContext } from "../../context/NewsContext";
 import { IoTimeOutline } from "react-icons/io5";
@@ -40,7 +40,7 @@ function AdminHeader({ open }) {
   px-4 md:px-8 border-b border-gray-200  bg-white dark:bg-gray-800 ${mode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
 >
 <div className="mx-20"> 
-  <h1 className="text-lg md:text-2xl font-bold  ">Admin Panel</h1>
+  <Link to="/"  className="text-lg md:text-2xl font-bold   ">Home</Link>
 </div>
 
   <div className="flex items-center space-x-4">
