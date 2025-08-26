@@ -7,17 +7,14 @@ import { IoPerson } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
 function Login() {
   const navigate = useNavigate();
-  const { filterChange, state, user, setUser, handleLogout } =
-    useContext(NewsContext);
-  const [toggleDown, setToggleDown] = useState(false);
-  const [errors, setErrors] = useState([]);
-
-  const {
-    toggleLoginModal,
+  const { filterChange, state, user, setUser, handleLogout, toggleLoginModal,
     isModalOpen,
     toggleRegisterModal,
-    isRegisterModalOpen,
-  } = useContext(NewsContext);
+    isRegisterModalOpen } =
+    useContext(NewsContext);
+   const [toggleDown, setToggleDown] = useState(false);
+   const [errors, setErrors] = useState([]);
+   axios.defaults.withCredentials = true;
 
   const handleSubmitRegister = async (event) => {
     event.preventDefault();
