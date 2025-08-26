@@ -21,13 +21,12 @@ exports.Login = async (req, res) => {
       return res.status(400).json({ message: "Şifre hatalı" });
     }
 
-    // Session Kaydet
     req.session.user = user;
     req.session.userId = user._id;
     req.session.role = user.role;
     req.session.isAuthenticated = true;
     
-    console.log("🔥 Session after login:", req.session); // **Debug için ekledik**
+  
 
     return res.status(200).json({ message: "Giriş başarılı", user: req.session.user });
 

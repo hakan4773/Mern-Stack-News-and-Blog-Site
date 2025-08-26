@@ -104,17 +104,17 @@ useEffect(() => {
 
   const [user, setUser] = useState(null);
 
-  //Giriş yapan kullanıcı bilgisini alma
+  
   useEffect(() => {
     const checkUserSession = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/users`, {
-          withCredentials: true, // Session bilgisi ile istek yap
+          withCredentials: true, 
         });
         if (response.data.user) {
-          setUser(response.data.user); // Session'dan gelen kullanıcıyı kaydet
+          setUser(response.data.user); 
         } else {
-          setUser(null); // Oturum yoksa kullanıcı bilgisi null olur
+          setUser(null); 
         }
       } catch (error) {
         console.error("Oturum kontrol hatası:", error);
@@ -123,10 +123,9 @@ useEffect(() => {
     };
     checkUserSession();
   }, []);
-  
 
 
-  // Admin Sayfa teması
+
   const [mode,setMode]=useState(false)
     useEffect(()=>{
 const saveMode=localStorage.getItem("theme")==="true"
@@ -146,7 +145,6 @@ return newMode;
 
 
 
-//Tarih dönüştürme
     function formatTimeAgo(date) { 
       const now = new Date();
       const difference = now - new Date(date);
@@ -165,11 +163,9 @@ return newMode;
     }
   
 
-    //Logout fonksiyonu
     const handleLogout = async () => {
       try {
-        await axios.post('http://localhost:5000/users/logout', {}, { withCredentials: true });
-       // localStorage.removeItem('token');
+        await axios.post( `${process.env.REACT_APP_BACKEND_URL}/users/logout`, {}, { withCredentials: true });
        window.location.reload(); 
         setUser(null);
         alert("Logged out successfully");
