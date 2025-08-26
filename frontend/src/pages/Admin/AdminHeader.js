@@ -82,11 +82,11 @@ function AdminHeader() {
                     />
                     
                     <div className="flex flex-col text-left">
-                      {mes.message}
+                      {mes?.message}
                       <div className="flex ">
                         <p className="text-sm text-gray-500 flex ">
                           <IoTimeOutline className="text-blue-500 " size={20} />
-                          {formatTimeAgo(mes.createdAt)}
+                          {formatTimeAgo(mes?.createdAt)}
                         </p>
                       </div>
                     </div>
@@ -106,7 +106,7 @@ function AdminHeader() {
 
         <div className="px-4 flex items-center relative border-l border-white">
           <img
-            src={user.image}
+            src={user?.image}
             onClick={toggleLogin}
             className="w-12 h-12 rounded-full cursor-pointer"
             alt="profile"
@@ -120,19 +120,19 @@ function AdminHeader() {
 
               <div className="p-4 flex">
                 <img
-                  src={user.image}
+                  src={user?.image}
                   onClick={toggleLogin}
                   className="w-12 h-12 rounded-full cursor-pointer"
                   alt="profile"
                 />
                 <div>
                   <p className="px-4 text-gray-800 font-semibold ">
-                    {user.name}
+                    {user?.name}
                   </p>
-                  <p className=" px-4 text-gray-600 text-sm">{user.role}</p>
+                  <p className=" px-4 text-gray-600 text-sm">{user?.role}</p>
                   <p className="flex px-4 text-gray-600 text-sm">
                     <CiMail size={20} />
-                    <span className="mx-1">{user.email}</span>
+                    <span className="mx-1">{user?.email}</span>
                   </p>
                 </div>
               </div>

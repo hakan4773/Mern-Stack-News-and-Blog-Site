@@ -4,7 +4,7 @@ exports.getAdminPage = async (req, res) =>{
     try {
         const user = await User.findOne({ _id: req.session.userId}).populate({
             path: "news",
-            populate: { path: "category", select: "name" } // Populate category name within news
+            populate: { path: "category", select: "name" }
         });  
         const news = await News.find({ authorId: user }).populate("category","name"); 
         res.status(200).json({ user, news });
@@ -25,4 +25,14 @@ exports.getProfilePage = async (req, res) =>{
     }
 };
 
-
+exports.updateRole = async (req, res) => {
+  try {
+    const { role } = req.body;
+    const { id } = req.params; 
+    await User.findByIdAndUpdate(id, { role });
+    res.status(200).json({ message: "Role updated successfully" });
+  } catch (error) {
+    console.error("Error updating role:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

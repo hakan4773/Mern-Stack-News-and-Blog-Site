@@ -4,9 +4,8 @@ import { NewsContext } from '../../context/NewsContext';
 import { MdDelete } from "react-icons/md";
 
 function Users() {
-    const {mode}=useContext(NewsContext);
-    const [userİnformation, setUserİnformation] = useState([]);
- console.log(userİnformation);
+    const {mode,user}=useContext(NewsContext);
+    const [userInformation, setUserInformation] = useState([]);
     useEffect(() => {
       const fetchUser = async () => {
         try {
@@ -14,7 +13,11 @@ function Users() {
             `${process.env.REACT_APP_BACKEND_URL}/users/users`,
             { withCredentials: true }
           );
-          setUserİnformation(responseUsers.data.userİnformation);
+          const filteredUsers = responseUsers.data.userInformation.filter(
+            (users) => users._id !== user._id
+          );
+          console.log("Kullanıcı Bilgileri: ", filteredUsers);
+          setUserInformation(filteredUsers);
         } catch (error) {
           console.error("Hata Oluştu: ", error.message);
         }
@@ -30,19 +33,37 @@ const deleteUsers=async(id)=>
         await axios.delete(
           `${process.env.REACT_APP_BACKEND_URL}/users/users/${id}`
         );
-        setUserİnformation(userİnformation.filter((user) => user._id !== id));
+        setUserInformation(userInformation.filter((user) => user._id !== id));
       } catch (error) {
         console.error("Kategori silinemedi", error.message);
       }
     }
   }
 
+  const assignRole = async (userId, role) => {
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/Admin/users/${userId}/role`,
+        { role },
+        { withCredentials: true }
+      );
+      setUserInformation(
+        userInformation.map((user) =>
+          user._id === userId ? { ...user, role } : user
+        )
+      );
+      alert("Yetki atandı");
+    } catch (error) {
+      console.error("Yetki atanamadı", error.message);
+    }
+  };
+
   return (
     <div className='flex flex-col w-full  items-center text-center p-4  h-full '>
 <div className={`w-full h-auto flex ${mode ? 'bg-slate-400 text-white' : 'bg-slate-50 text-black'}`}>
   <table className="table-auto w-full text-black ">
     <thead>
-      <tr className='bg-blue-500 text-white '>
+      <tr className='bg-blue-300 text-white '>
         <th></th>
         <th>User ID</th>
         <th>User image</th>
@@ -55,24 +76,30 @@ const deleteUsers=async(id)=>
       </tr>
     </thead>
     <tbody >
-      {userİnformation?.map((user) => (
-        <tr className='border-b border-black ' key={user._id}>
+      {userInformation?.map((user) => (
+        <tr className='   ' key={user._id}>
           <td><button 
           onClick={()=>deleteUsers(user._id)}
             
             ><MdDelete className='text-red-500' size={20}/></button></td>
-          <td className='border-r  border-black '>{user._id}</td>
-          <td className='border-r  border-black '><img src={user.image} alt='users' className='p-2 w-20 h-20'></img></td>
-          <td className='border-r  border-black '>       
-               <select className='m-2 '>
-                <option className=' p-2' value={user.role}>{user.role}</option>
+          <td className='border-r  border-gray-300  '>{user._id}</td>
+          <td className='border-r  border-gray-300 '><img src={user.image || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt='users' className='p-2 w-20 h-20'></img></td>
+          <td className='border-r  border-gray-300 '>       
+              <select
+                  className="m-2"
+                  value={user.role}
+                  onChange={(e) => assignRole(user._id, e.target.value)}
+                >
+                  <option value="user">user</option>
+                  <option value="author">author</option>
+                  <option value="admin">admin</option>
                 </select>
           </td>
-          <td className='border-r border-black '> {user.name}</td>
-          <td className='border-r  border-black '>{user.email}</td>
-          <td className='border-r  border-black '>{user.gender}</td>
-          <td className='border-r border-black '>{user.number || "belirtilmemiş"}</td>
-          <td >{user.Address || "belirtilmemiş"}</td>
+          <td className='border-r border-gray-300 '> {user.name}</td>
+          <td className='border-r  border-gray-300 '>{user.email}</td>
+          <td className='border-r  border-gray-300 '>{user.gender}</td>
+          <td className='border-r border-gray-300 '>{user.number || "belirtilmemiş"}</td>
+          <td className='border-r border-gray-300 '>{user.Address || "belirtilmemiş"}</td>
         </tr>
       ))}
     </tbody>
